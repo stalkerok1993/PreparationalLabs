@@ -3,9 +3,9 @@ using Interfaces.Phone.Components;
 using Interfaces.Phone.Components.Screen;
 using Interfaces.Phone.Graphics;
 using Interfaces.Phone.Misc;
-using UnderstandingOop.Phone.Components.Playback;
-using UnderstandingOop.Phone.Components.Charger;
-using UnderstandingOop.Output;
+using Interfaces.Phone.Components.Playback;
+using Interfaces.Phone.Components.Charger;
+using Interfaces.Output;
 
 namespace Interfaces.Phone
 {

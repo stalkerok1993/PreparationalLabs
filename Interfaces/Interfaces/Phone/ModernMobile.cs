@@ -1,6 +1,6 @@
 ﻿using Interfaces.Phone.Components.Screen;
 using Interfaces.Phone.Components.Sensor;
-using UnderstandingOop.Output;
+using Interfaces.Output;
 
 namespace Interfaces.Phone
 {

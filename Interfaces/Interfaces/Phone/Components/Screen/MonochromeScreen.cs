@@ -1,6 +1,5 @@
-﻿using System;
+﻿using Interfaces.Output;
 using Interfaces.Phone.Graphics;
-using UnderstandingOop.Output;
 
 namespace Interfaces.Phone.Components.Screen
 {

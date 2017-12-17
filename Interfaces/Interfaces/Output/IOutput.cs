@@ -1,4 +1,4 @@
-﻿namespace UnderstandingOop.Output
+﻿namespace Interfaces.Output
 {
     public interface IOutput
     {

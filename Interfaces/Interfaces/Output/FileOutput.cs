@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace UnderstandingOop.Output
+namespace Interfaces.Output
 {
     class FileOutput : IOutput
     {

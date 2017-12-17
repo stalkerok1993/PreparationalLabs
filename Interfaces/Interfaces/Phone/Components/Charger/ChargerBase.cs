@@ -1,7 +1,7 @@
 ﻿using Interfaces.Phone;
-using UnderstandingOop.Output;
+using Interfaces.Output;
 
-namespace UnderstandingOop.Phone.Components.Charger
+namespace Interfaces.Phone.Components.Charger
 {
     public abstract class ChargerBase
     {

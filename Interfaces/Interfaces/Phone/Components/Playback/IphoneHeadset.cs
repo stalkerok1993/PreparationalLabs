@@ -1,6 +1,6 @@
-﻿using UnderstandingOop.Output;
+﻿using Interfaces.Output;
 
-namespace UnderstandingOop.Phone.Components.Playback
+namespace Interfaces.Phone.Components.Playback
 {
     public class IphoneHeadset : PlaybackBase
     {

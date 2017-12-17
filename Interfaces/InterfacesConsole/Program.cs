@@ -1,11 +1,11 @@
 ﻿using Interfaces.Phone;
 using System;
 using System.Collections.Generic;
-using UnderstandingOop.Output;
-using UnderstandingOop.Phone.Components.Charger;
-using UnderstandingOop.Phone.Components.Playback;
+using Interfaces.Output;
+using Interfaces.Phone.Components.Charger;
+using Interfaces.Phone.Components.Playback;
 
-namespace Interfaces
+namespace InterfacesConsole
 {
     class Program
     {

@@ -1,9 +1,8 @@
-﻿using Interfaces.Phone;
-using UnderstandingOop.Output;
+﻿using Interfaces.Output;
 
-namespace UnderstandingOop.Phone.Components.Charger
+namespace Interfaces.Phone.Components.Charger
 {
-    class UsbCharger : ChargerBase
+    public class UsbCharger : ChargerBase
     {
         public UsbCharger(IOutput output) : base(output)
         {

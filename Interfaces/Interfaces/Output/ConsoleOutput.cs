@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace UnderstandingOop.Output
+namespace Interfaces.Output
 {
-    class ConsoleOutput : IOutput
+    public class ConsoleOutput : IOutput
     {
         public void Write(string message)
         {

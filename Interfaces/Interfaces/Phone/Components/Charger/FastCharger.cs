@@ -1,9 +1,8 @@
-﻿using Interfaces.Phone;
-using UnderstandingOop.Output;
+﻿using Interfaces.Output;
 
-namespace UnderstandingOop.Phone.Components.Charger
+namespace Interfaces.Phone.Components.Charger
 {
-    class FastCharger : ChargerBase
+    public class FastCharger : ChargerBase
     {
         public FastCharger(IOutput output) : base(output)
         {
