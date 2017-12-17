@@ -1,16 +1,18 @@
 ﻿using Interfaces.Phone;
-using System;
+using UnderstandingOop.Output;
 
 namespace UnderstandingOop.Phone.Components.Charger
 {
-    class FastCharger : ICharger
+    class FastCharger : ChargerBase
     {
-        public Mobile Mobile { get; private set; }
+        public FastCharger(IOutput output) : base(output)
+        {
+        }
 
-        public void Charge(Mobile mobile)
+        public override void Charge(Mobile mobile)
         {
             Mobile = mobile;
-            Console.WriteLine($"{typeof(Mobile).Name} is charging with {nameof(FastCharger)}.");
+            output.WriteLine($"{typeof(Mobile).Name} is charging with {nameof(FastCharger)}.");
         }
     }
 }

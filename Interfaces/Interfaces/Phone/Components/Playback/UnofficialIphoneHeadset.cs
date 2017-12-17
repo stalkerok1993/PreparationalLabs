@@ -1,12 +1,16 @@
-﻿using System;
+﻿using UnderstandingOop.Output;
 
 namespace UnderstandingOop.Phone.Components.Playback
 {
-    public class UnofficialIphoneHeadset : IPlayback
+    public class UnofficialIphoneHeadset : PlaybackBase
     {
-        public void Play(object data)
+        public UnofficialIphoneHeadset(IOutput output) : base(output)
         {
-            Console.WriteLine($"{nameof(UnofficialIphoneHeadset)} sound.");
+        }
+
+        public override void Play(object data)
+        {
+            output.WriteLine($"{nameof(UnofficialIphoneHeadset)} sound.");
         }
     }
 }

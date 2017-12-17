@@ -1,6 +1,7 @@
 ﻿using Interfaces.Phone;
 using System;
 using System.Collections.Generic;
+using UnderstandingOop.Output;
 using UnderstandingOop.Phone.Components.Charger;
 using UnderstandingOop.Phone.Components.Playback;
 
@@ -16,20 +17,23 @@ namespace Interfaces
             public bool IsConfirmationNeeded { get; set; }
         }
 
-        private static Dictionary<char, AbstractCreator<IPlayback>> playbackCreators = new Dictionary<char, AbstractCreator<IPlayback>>()
+        public static IOutput output = new ConsoleOutput();
+        //public static IOutput output = new FileOutput(new System.IO.StreamWriter("output.txt"));
+
+        private static Dictionary<char, AbstractCreator<PlaybackBase>> playbackCreators = new Dictionary<char, AbstractCreator<PlaybackBase>>()
         {
-            {'1', new AbstractCreator<IPlayback>() {Name = "External speaker", Creator = () => new ExternalSpeaker()} },
-            {'2', new AbstractCreator<IPlayback>() {Name = "iPhone headset", Creator = () => new IphoneHeadset()} },
-            {'3', new AbstractCreator<IPlayback>() {Name = "Samsung headset", Creator = () => new SamsungHeadset()} },
-            {'4', new AbstractCreator<IPlayback>() {Name = "Unofficial iPhone headset", Creator = () => new UnofficialIphoneHeadset()} },
-            {'0', new AbstractCreator<IPlayback>() {Name = "Unplug playback", Creator = () => null, IsConfirmationNeeded = true} },
+            {'1', new AbstractCreator<PlaybackBase>() {Name = "External speaker", Creator = () => new ExternalSpeaker(output)} },
+            {'2', new AbstractCreator<PlaybackBase>() {Name = "iPhone headset", Creator = () => new IphoneHeadset(output)} },
+            {'3', new AbstractCreator<PlaybackBase>() {Name = "Samsung headset", Creator = () => new SamsungHeadset(output)} },
+            {'4', new AbstractCreator<PlaybackBase>() {Name = "Unofficial iPhone headset", Creator = () => new UnofficialIphoneHeadset(output)} },
+            {'0', new AbstractCreator<PlaybackBase>() {Name = "Unplug playback", Creator = () => null, IsConfirmationNeeded = true} },
         };
 
-        private static Dictionary<char, AbstractCreator<ICharger>> chargerCreators = new Dictionary<char, AbstractCreator<ICharger>>()
+        private static Dictionary<char, AbstractCreator<ChargerBase>> chargerCreators = new Dictionary<char, AbstractCreator<ChargerBase>>()
         {
-            {'1', new AbstractCreator<ICharger>() {Name = "Fast charger", Creator = () => new FastCharger()} },
-            {'2', new AbstractCreator<ICharger>() {Name = "USB charger", Creator = () => new UsbCharger()} },
-            {'0', new AbstractCreator<ICharger>() {Name = "Unplug charger", Creator = () => null, IsConfirmationNeeded = true} }
+            {'1', new AbstractCreator<ChargerBase>() {Name = "Fast charger", Creator = () => new FastCharger(output)} },
+            {'2', new AbstractCreator<ChargerBase>() {Name = "USB charger", Creator = () => new UsbCharger(output)} },
+            {'0', new AbstractCreator<ChargerBase>() {Name = "Unplug charger", Creator = () => null, IsConfirmationNeeded = true} }
         };
 
         private const char DEVICE_HEADPHONES = '1';
@@ -91,7 +95,7 @@ namespace Interfaces
 
         public static void Main(string[] args)
         {
-            var mobile = new ModernMobile();
+            var mobile = new ModernMobile(output);
 
             while (true)
             {
@@ -114,14 +118,14 @@ namespace Interfaces
                 switch (userInput.KeyChar)
                 {
                     case DEVICE_HEADPHONES:
-                        AbstractCreator<IPlayback> playbackCreator = playbackCreators[ChooseCreator("Choose playback:", playbackCreators)];
+                        AbstractCreator<PlaybackBase> playbackCreator = playbackCreators[ChooseCreator("Choose playback:", playbackCreators)];
                         mobile.PlaybackComponent = playbackCreator.Creator.Invoke();
 
                         mobile.Play(new object());
                         break;
                     case DEVICE_CHARGER:
-                        AbstractCreator<ICharger> chargerCreator = chargerCreators[ChooseCreator("Choose charger:", chargerCreators)];
-                        ICharger charger = chargerCreator.Creator.Invoke();
+                        AbstractCreator<ChargerBase> chargerCreator = chargerCreators[ChooseCreator("Choose charger:", chargerCreators)];
+                        ChargerBase charger = chargerCreator.Creator.Invoke();
 
                         charger?.Charge(mobile);
                         break;

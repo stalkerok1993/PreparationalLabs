@@ -1,5 +1,6 @@
 ﻿using Interfaces.Phone.Graphics;
 using Interfaces.Phone.Misc;
+using UnderstandingOop.Output;
 
 namespace Interfaces.Phone.Components.Screen
 {
@@ -9,6 +10,13 @@ namespace Interfaces.Phone.Components.Screen
         public SizeFlat Size { get; set; }
         public int ColoursCount { get; set; }
         public bool HasHighlight { get; set; }
+
+        protected IOutput output;
+
+        public ScreenBase(IOutput output)
+        {
+            this.output = output;
+        }
 
         public abstract void Show(IScreenImage screenImage);
 

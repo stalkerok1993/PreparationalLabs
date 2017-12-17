@@ -1,12 +1,16 @@
-﻿using System;
+﻿using UnderstandingOop.Output;
 
 namespace UnderstandingOop.Phone.Components.Playback
 {
-    public class ExternalSpeaker : IPlayback
+    public class ExternalSpeaker : PlaybackBase
     {
-        public void Play(object data)
+        public ExternalSpeaker(IOutput output) : base(output)
         {
-            Console.WriteLine($"{nameof(ExternalSpeaker)} sound.");
+        }
+
+        public override void Play(object data)
+        {
+            output.WriteLine($"{nameof(ExternalSpeaker)} sound.");
         }
     }
 }

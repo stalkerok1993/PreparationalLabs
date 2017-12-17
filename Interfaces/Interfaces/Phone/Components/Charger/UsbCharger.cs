@@ -1,16 +1,18 @@
 ﻿using Interfaces.Phone;
-using System;
+using UnderstandingOop.Output;
 
 namespace UnderstandingOop.Phone.Components.Charger
 {
-    class UsbCharger : ICharger
+    class UsbCharger : ChargerBase
     {
-        public Mobile Mobile { get; private set; }
+        public UsbCharger(IOutput output) : base(output)
+        {
+        }
 
-        public void Charge(Mobile mobile)
+        public override void Charge(Mobile mobile)
         {
             Mobile = mobile;
-            Console.WriteLine($"{typeof(Mobile).Name} is charging with {nameof(UsbCharger)}.");
+            output.WriteLine($"{typeof(Mobile).Name} is charging with {nameof(UsbCharger)}.");
         }
     }
 }

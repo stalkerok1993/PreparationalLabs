@@ -5,6 +5,7 @@ using Interfaces.Phone.Graphics;
 using Interfaces.Phone.Misc;
 using UnderstandingOop.Phone.Components.Playback;
 using UnderstandingOop.Phone.Components.Charger;
+using UnderstandingOop.Output;
 
 namespace Interfaces.Phone
 {
@@ -20,9 +21,16 @@ namespace Interfaces.Phone
 
         public abstract ScreenBase Screen { get; }
 
-        public IPlayback PlaybackComponent { get; set; }
+        public PlaybackBase PlaybackComponent { get; set; }
 
-        public ICharger Charger { get; private set; }
+        public ChargerBase Charger { get; private set; }
+
+        protected IOutput output;
+
+        public Mobile(IOutput output)
+        {
+            this.output = output;
+        }
 
         public void Show(IScreenImage screenImage)
         {
@@ -45,7 +53,7 @@ namespace Interfaces.Phone
             PlaybackComponent?.Play(data);
         }
 
-        public void Charge(ICharger charger)
+        public void Charge(ChargerBase charger)
         {
             Charger = charger;
             Charger?.Charge(this);
