@@ -10,7 +10,7 @@ namespace InterfacesTests.Phone.Components.Misc
 
         public PhoneStub(IOutput output) : base(output)
         {
-            Screen = new OledScreen(output);
+            Screen = new OLEDScreen(output);
         }
     }
 }

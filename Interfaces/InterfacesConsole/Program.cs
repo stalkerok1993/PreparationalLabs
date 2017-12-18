@@ -9,16 +9,8 @@ namespace InterfacesConsole
 {
     class Program
     {
-        private class AbstractCreator<T>
-        {
-            public delegate T GenericCreator();
-            public string Name { get; set; }
-            public GenericCreator Creator { get; set; }
-            public bool IsConfirmationNeeded { get; set; }
-        }
-
         public static IOutput output = new ConsoleOutput();
-        //public static IOutput output = new FileOutput(new System.IO.StreamWriter("output.txt"));
+        //output = new FileOutput(new System.IO.StreamWriter("output.txt")); // TODO: uncomment this to test other outputs
 
         private static Dictionary<char, AbstractCreator<PlaybackBase>> playbackCreators = new Dictionary<char, AbstractCreator<PlaybackBase>>()
         {
@@ -32,7 +24,7 @@ namespace InterfacesConsole
         private static Dictionary<char, AbstractCreator<ChargerBase>> chargerCreators = new Dictionary<char, AbstractCreator<ChargerBase>>()
         {
             {'1', new AbstractCreator<ChargerBase>() {Name = "Fast charger", Creator = () => new FastCharger(output)} },
-            {'2', new AbstractCreator<ChargerBase>() {Name = "USB charger", Creator = () => new UsbCharger(output)} },
+            {'2', new AbstractCreator<ChargerBase>() {Name = "USB charger", Creator = () => new USBCharger(output)} },
             {'0', new AbstractCreator<ChargerBase>() {Name = "Unplug charger", Creator = () => null, IsConfirmationNeeded = true} }
         };
 
@@ -136,6 +128,11 @@ namespace InterfacesConsole
             }
         }
 
-        
+        private class AbstractCreator<T> {
+            public delegate T GenericCreator();
+            public string Name { get; set; }
+            public GenericCreator Creator { get; set; }
+            public bool IsConfirmationNeeded { get; set; }
+        }
     }
 }

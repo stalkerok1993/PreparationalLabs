@@ -2,9 +2,9 @@
 
 namespace Interfaces.Phone.Components
 {
-    public class SimCard
+    public class SIMCard
     {
-        public SimSizeFormat SizeFormat { get; set; }
+        public SIMSizeFormat SizeFormat { get; set; }
 
         public override string ToString()
         {

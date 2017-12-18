@@ -1,6 +1,6 @@
 ﻿namespace Interfaces.Phone.Misc
 {
-    public enum SimSizeFormat
+    public enum SIMSizeFormat
     {
         Sim,
         MiniSim,

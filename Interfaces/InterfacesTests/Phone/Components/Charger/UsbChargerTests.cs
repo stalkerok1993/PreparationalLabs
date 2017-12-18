@@ -11,7 +11,7 @@ namespace Interfaces.Phone.Components.Charger.Tests
         {
             var output = new OutputMock();
             var mobile = new PhoneStub(output);
-            var charger = new UsbCharger(output);
+            var charger = new USBCharger(output);
 
             mobile.Charge(charger);
 

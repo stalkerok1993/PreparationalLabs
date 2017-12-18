@@ -7,11 +7,11 @@ namespace Interfaces.Phone
     {
         public override ScreenBase Screen => OledScreen;
 
-        public readonly OledScreen OledScreen;
+        public readonly OLEDScreen OledScreen;
 
         public SimCorpMobile(IOutput output) : base(output)
         {
-             OledScreen = new OledScreen(output);
+             OledScreen = new OLEDScreen(output);
         }
     }
 }

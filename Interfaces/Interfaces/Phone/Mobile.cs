@@ -16,7 +16,7 @@ namespace Interfaces.Phone
         public Dynamic Dynamics { get; set; }
         public Keyboard Keyboards { get; set; }
         public Microphone Microphones { get; set; }
-        public SimCard SimCards { get; set; }
+        public SIMCard SimCards { get; set; }
         public Size Size { get; set; }
 
         public abstract ScreenBase Screen { get; }
