@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{542B75A2-A14E-4355-8257-78C1265BF1EE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Mobile</RootNamespace>
+    <AssemblyName>Mobile</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Formatter\FormatterSimpleFactory.cs" />
+    <Compile Include="Output\ConsoleOutput.cs" />
+    <Compile Include="Output\FileOutput.cs" />
+    <Compile Include="Output\IOutput.cs" />
+    <Compile Include="Output\TextBoxOutput.cs" />
+    <Compile Include="Phone\Components\Battery.cs" />
+    <Compile Include="Phone\Components\Camera.cs" />
+    <Compile Include="Phone\Components\Charger\FastCharger.cs" />
+    <Compile Include="Phone\Components\Charger\ChargerBase.cs" />
+    <Compile Include="Phone\Components\Charger\USBCharger.cs" />
+    <Compile Include="Phone\Components\Playback\ExternalSpeaker.cs" />
+    <Compile Include="Phone\Components\Playback\IphoneHeadset.cs" />
+    <Compile Include="Phone\Components\Playback\PlaybackBase.cs" />
+    <Compile Include="Phone\Components\Playback\SamsungHeadset.cs" />
+    <Compile Include="Phone\Components\Playback\UnofficialIphoneHeadset.cs" />
+    <Compile Include="Phone\Components\Screen\ColorfulScreen.cs" />
+    <Compile Include="Phone\Components\Dynamic.cs" />
+    <Compile Include="Phone\Components\Keyboard.cs" />
+    <Compile Include="Phone\Components\Microphone.cs" />
+    <Compile Include="Phone\Components\Screen\MonochromeScreen.cs" />
+    <Compile Include="Phone\Components\Sensor\MultiTouchScreen.cs" />
+    <Compile Include="Phone\Components\Screen\OLEDScreen.cs" />
+    <Compile Include="Phone\Components\Sensor\ProximitySensor.cs" />
+    <Compile Include="Phone\Components\Screen\RetinaScreen.cs" />
+    <Compile Include="Phone\Components\Screen\ScreenBase.cs" />
+    <Compile Include="Phone\Components\Sensor\Sensor.cs" />
+    <Compile Include="Phone\Components\SIMCard.cs" />
+    <Compile Include="Phone\Components\Sensor\SingleTouchScreen.cs" />
+    <Compile Include="Phone\Components\Sensor\TouchScreen.cs" />
+    <Compile Include="Phone\Graphics\Image.cs" />
+    <Compile Include="Phone\Graphics\IScreenImage.cs" />
+    <Compile Include="Phone\Misc\CoordsFlat.cs" />
+    <Compile Include="Phone\Misc\SIMSizeFormat.cs" />
+    <Compile Include="Phone\Misc\Size.cs" />
+    <Compile Include="Phone\Misc\SizeFlat.cs" />
+    <Compile Include="Phone\Misc\TouchTechnology.cs" />
+    <Compile Include="Phone\MobileBase.cs" />
+    <Compile Include="Phone\ModernMobile.cs" />
+    <Compile Include="Phone\NetworkServices\SMS\Message.cs" />
+    <Compile Include="Phone\NetworkServices\SMS\SMSProvider.cs" />
+    <Compile Include="Phone\SimCorpMobile.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
