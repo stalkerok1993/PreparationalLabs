@@ -61,5 +61,10 @@ namespace Mobile.Phone
             Charger = charger;
             Charger?.Charge(this);
         }
+
+        public void ReceiveSMS(string message)
+        {
+            SMSProvider?.RaiseSMSRecieverEvent(message);
+        }
     }
 }

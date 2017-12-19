@@ -45,7 +45,7 @@ namespace EventsDelegatesForm
                 int notMainThreadSmsCount = 1;
                 System.Threading.Timer notMainThreadTimer = new System.Threading.Timer((sender) => 
                 {
-                    mobile.SMSProvider.RaiseSMSRecieverEvent($"SMS #{notMainThreadSmsCount++} NOT from Main thread.");
+                    mobile.ReceiveSMS($"SMS #{notMainThreadSmsCount++} NOT from Main thread.");
                 }, null, 1000, 3000);
             }).Start();
         }
@@ -53,7 +53,7 @@ namespace EventsDelegatesForm
         private int smsCount = 1;
         private void timerInMainThread_Tick(object sender, System.EventArgs e)
         {
-            mobile.SMSProvider.RaiseSMSRecieverEvent($"SMS #{smsCount++} from Main thread.");
+            mobile.ReceiveSMS($"SMS #{smsCount++} from Main thread.");
         }
 
         private static string FormatWithTime(string message)

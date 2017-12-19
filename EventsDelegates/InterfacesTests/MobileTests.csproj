@@ -64,6 +64,7 @@
     <Compile Include="Phone\Components\Playback\IphoneHeadsetTests.cs" />
     <Compile Include="Phone\Components\Playback\SamsungHeadsetTests.cs" />
     <Compile Include="Phone\Components\Playback\UnofficialIphoneHeadsetTests.cs" />
+    <Compile Include="Phone\MobileBaseTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -2,7 +2,6 @@
 using Mobile.Phone;
 using Mobile.Phone.Components.Charger;
 using Mobile.Phone.Components.Playback;
-using InterfacesForm.Output;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
