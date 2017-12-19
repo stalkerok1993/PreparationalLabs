@@ -10,13 +10,13 @@ namespace UnderstandingOop
         {
             var scMobile = new SimCorpMobile();
             scMobile.Screen.Show(new Image());
-            Console.WriteLine(scMobile.Description);
+            Console.WriteLine(scMobile);
 
             Console.WriteLine();
 
             var modernMobile = new ModernMobile();
             modernMobile.Screen.Show(new Image());
-            Console.WriteLine(modernMobile.Description);
+            Console.WriteLine(modernMobile);
 
             Console.WriteLine("\nPress any key to continue . . .");
             Console.ReadKey();

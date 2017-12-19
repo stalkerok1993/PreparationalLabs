@@ -6,6 +6,11 @@ namespace UnderstandingOop.Phone.Components
     {
         public SIMSizeFormat SizeFormat { get; set; }
 
+        public SIMCard(SIMSizeFormat sizeFormat = SIMSizeFormat.SIM)
+        {
+            SizeFormat = sizeFormat;
+        }
+
         public override string ToString()
         {
             return "SIM Card";
