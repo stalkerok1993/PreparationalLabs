@@ -6,7 +6,7 @@ namespace UnderstandingOop.Phone.Components.Sensor
     {
         public int TouchCountMax { get; set; }
 
-        public MultiTouchScreen(int touchCountMax = 1, TouchTechnology touchTechnology = TouchTechnology.Capacitive) : base(TouchTechnology)
+        public MultiTouchScreen(int touchCountMax = 1, TouchTechnology touchTechnology = TouchTechnology.Capacitive) : base(touchTechnology)
         {
             TouchCountMax = touchCountMax;
         }

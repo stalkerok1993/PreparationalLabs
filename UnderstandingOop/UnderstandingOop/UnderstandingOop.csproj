@@ -55,13 +55,13 @@
     <Compile Include="Phone\Components\Screen\RetinaScreen.cs" />
     <Compile Include="Phone\Components\Screen\ScreenBase.cs" />
     <Compile Include="Phone\Components\Sensor\Sensor.cs" />
-    <Compile Include="Phone\Components\SimCard.cs" />
+    <Compile Include="Phone\Components\SIMCard.cs" />
     <Compile Include="Phone\Components\Sensor\SingleTouchScreen.cs" />
     <Compile Include="Phone\Components\Sensor\TouchScreen.cs" />
     <Compile Include="Phone\Graphics\Image.cs" />
     <Compile Include="Phone\Graphics\IScreenImage.cs" />
     <Compile Include="Phone\Misc\CoordsFlat.cs" />
-    <Compile Include="Phone\Misc\SimSizeFormat.cs" />
+    <Compile Include="Phone\Misc\SIMSizeFormat.cs" />
     <Compile Include="Phone\Misc\Size.cs" />
     <Compile Include="Phone\Misc\SizeFlat.cs" />
     <Compile Include="Phone\Misc\TouchTechnology.cs" />
