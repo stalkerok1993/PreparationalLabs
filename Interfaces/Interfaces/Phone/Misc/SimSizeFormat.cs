@@ -2,10 +2,10 @@
 {
     public enum SIMSizeFormat
     {
-        Sim,
-        MiniSim,
-        MicroSim,
-        NanoSimA,
-        NanoSimB
+        SIM,
+        MiniSIM,
+        MicroSIM,
+        NanoSIMA,
+        NanoSIMB
     }
 }

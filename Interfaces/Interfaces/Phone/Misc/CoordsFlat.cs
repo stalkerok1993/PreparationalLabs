@@ -9,7 +9,7 @@
         {
         }
 
-        public CoordsFlat(int horizontalPx, int verticalPx) : this()
+        public CoordsFlat(int horizontalPx, int verticalPx)
         {
             HorizontalPx = horizontalPx;
             VerticalPx = verticalPx;

@@ -1,21 +1,30 @@
-﻿using Interfaces.Phone.Graphics;
+﻿using Interfaces.Output;
+using Interfaces.Phone.Graphics;
 using Interfaces.Phone.Misc;
-using Interfaces.Output;
 
 namespace Interfaces.Phone.Components.Screen
 {
     public abstract class ScreenBase
     {
-        public CoordsFlat CoordsFlatPx { get; set; }
-        public SizeFlat Size { get; set; }
-        public int ColoursCount { get; set; }
-        public bool HasHighlight { get; set; }
-
         protected IOutput output;
 
-        public ScreenBase(IOutput output)
+        public CoordsFlat Resolution { get; set; }
+        public SizeFlat SizeMm { get; set; }
+        public int ColorsCount { get; set; }
+        public bool HasHighlight { get; set; }
+
+        public ScreenBase()
         {
-            this.output = output;
+            Resolution = new CoordsFlat(16, 16);
+            SizeMm = new SizeFlat(10, 10);
+        }
+
+        public ScreenBase(IOutput output, CoordsFlat resolution, SizeFlat sizeMm, int colorsCount = 2, bool hasHighlight = false)
+        {
+            Resolution = resolution;
+            SizeMm = sizeMm;
+            ColorsCount = colorsCount;
+            HasHighlight = hasHighlight;
         }
 
         public abstract void Show(IScreenImage screenImage);

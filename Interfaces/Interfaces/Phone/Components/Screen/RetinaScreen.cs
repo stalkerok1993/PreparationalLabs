@@ -1,11 +1,14 @@
-﻿using Interfaces.Output;
+﻿using System;
 using Interfaces.Phone.Graphics;
+using Interfaces.Phone.Misc;
+using Interfaces.Output;
 
 namespace Interfaces.Phone.Components.Screen
 {
     class RetinaScreen : ColorfulScreen
     {
-        public RetinaScreen(IOutput output) : base(output)
+        public RetinaScreen(IOutput output, CoordsFlat resolution, SizeFlat size, int colorsCount = 65536, bool hasHighlight = true) 
+            : base(output, resolution, size, colorsCount, hasHighlight)
         {
         }
 
