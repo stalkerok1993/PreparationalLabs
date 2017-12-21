@@ -1,9 +1,10 @@
-﻿using Interfaces.Phone;
-using System;
-using System.Collections.Generic;
-using Interfaces.Output;
+﻿using Interfaces.Output;
+using Interfaces.Phone;
 using Interfaces.Phone.Components.Charger;
 using Interfaces.Phone.Components.Playback;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace InterfacesConsole
 {
@@ -12,20 +13,20 @@ namespace InterfacesConsole
         public static IOutput output = new ConsoleOutput();
         //output = new FileOutput(new System.IO.StreamWriter("output.txt")); // TODO: uncomment this to test other outputs
 
-        private static Dictionary<char, AbstractCreator<PlaybackBase>> playbackCreators = new Dictionary<char, AbstractCreator<PlaybackBase>>()
+        private static Dictionary<char, AbstractCreator<IPlayback>> playbackCreators = new Dictionary<char, AbstractCreator<IPlayback>>()
         {
-            {'1', new AbstractCreator<PlaybackBase>() {Name = "External speaker", Creator = () => new ExternalSpeaker(output)} },
-            {'2', new AbstractCreator<PlaybackBase>() {Name = "iPhone headset", Creator = () => new IphoneHeadset(output)} },
-            {'3', new AbstractCreator<PlaybackBase>() {Name = "Samsung headset", Creator = () => new SamsungHeadset(output)} },
-            {'4', new AbstractCreator<PlaybackBase>() {Name = "Unofficial iPhone headset", Creator = () => new UnofficialIphoneHeadset(output)} },
-            {'0', new AbstractCreator<PlaybackBase>() {Name = "Unplug playback", Creator = () => null, IsConfirmationNeeded = true} },
+            {'1', new AbstractCreator<IPlayback>() {Name = "External speaker", Creator = () => new ExternalSpeaker(output)} },
+            {'2', new AbstractCreator<IPlayback>() {Name = "iPhone headset", Creator = () => new IphoneHeadset(output)} },
+            {'3', new AbstractCreator<IPlayback>() {Name = "Samsung headset", Creator = () => new SamsungHeadset(output)} },
+            {'4', new AbstractCreator<IPlayback>() {Name = "Unofficial iPhone headset", Creator = () => new UnofficialIphoneHeadset(output)} },
+            {'0', new AbstractCreator<IPlayback>() {Name = "Unplug playback", Creator = () => null, IsConfirmationNeeded = true} },
         };
 
-        private static Dictionary<char, AbstractCreator<ChargerBase>> chargerCreators = new Dictionary<char, AbstractCreator<ChargerBase>>()
+        private static Dictionary<char, AbstractCreator<ICharger>> chargerCreators = new Dictionary<char, AbstractCreator<ICharger>>()
         {
-            {'1', new AbstractCreator<ChargerBase>() {Name = "Fast charger", Creator = () => new FastCharger(output)} },
-            {'2', new AbstractCreator<ChargerBase>() {Name = "USB charger", Creator = () => new USBCharger(output)} },
-            {'0', new AbstractCreator<ChargerBase>() {Name = "Unplug charger", Creator = () => null, IsConfirmationNeeded = true} }
+            {'1', new AbstractCreator<ICharger>() {Name = "Fast charger", Creator = () => new FastCharger(output)} },
+            {'2', new AbstractCreator<ICharger>() {Name = "USB charger", Creator = () => new OrdinaryCharger(output)} },
+            {'0', new AbstractCreator<ICharger>() {Name = "Unplug charger", Creator = () => null, IsConfirmationNeeded = true} }
         };
 
         private const char DEVICE_HEADPHONES = '1';
@@ -44,7 +45,7 @@ namespace InterfacesConsole
             Console.WriteLine($"{ACCEPT} - ACCEPT");
             Console.WriteLine($"{CANCEL} - ABORT");
 
-            var keyInfo = Console.ReadKey();
+            var keyInfo = ReadKeyRestricted();
             Console.WriteLine();
 
             switch (keyInfo.KeyChar)
@@ -67,7 +68,7 @@ namespace InterfacesConsole
                 Console.WriteLine($"{key} - {creators[key].Name}");
             }
 
-            ConsoleKeyInfo keyInfo = Console.ReadKey();
+            ConsoleKeyInfo keyInfo = ReadKeyRestricted();
             Console.WriteLine();
 
             char choice = keyInfo.KeyChar;
@@ -85,6 +86,20 @@ namespace InterfacesConsole
             return choice;
         }
 
+        private static readonly ConsoleKey[] permittedKeys = new ConsoleKey[] { ConsoleKey.D0, ConsoleKey.D1, ConsoleKey.D2, ConsoleKey.D3, ConsoleKey.D4, ConsoleKey.Escape };
+        private static ConsoleKeyInfo ReadKeyRestricted()
+        {
+            ConsoleKeyInfo keyInfo;
+            do
+            {
+                Console.CursorLeft = 0;
+                keyInfo = Console.ReadKey();
+            }
+            while (!permittedKeys.Contains(keyInfo.Key));
+
+            return keyInfo;
+        }
+
         public static void Main(string[] args)
         {
             var mobile = new ModernMobile(output);
@@ -96,7 +111,7 @@ namespace InterfacesConsole
                 Console.WriteLine($"{DEVICE_HEADPHONES} - Headphones");
                 Console.WriteLine($"{DEVICE_CHARGER} - Charger");
 
-                ConsoleKeyInfo userInput = Console.ReadKey();
+                ConsoleKeyInfo userInput = ReadKeyRestricted();
                 Console.WriteLine();
                 if (userInput.Key == ConsoleKey.Escape)
                 {
@@ -110,14 +125,14 @@ namespace InterfacesConsole
                 switch (userInput.KeyChar)
                 {
                     case DEVICE_HEADPHONES:
-                        AbstractCreator<PlaybackBase> playbackCreator = playbackCreators[ChooseCreator("Choose playback:", playbackCreators)];
+                        AbstractCreator<IPlayback> playbackCreator = playbackCreators[ChooseCreator("Choose playback:", playbackCreators)];
                         mobile.PlaybackComponent = playbackCreator.Creator.Invoke();
 
                         mobile.Play(new object());
                         break;
                     case DEVICE_CHARGER:
-                        AbstractCreator<ChargerBase> chargerCreator = chargerCreators[ChooseCreator("Choose charger:", chargerCreators)];
-                        ChargerBase charger = chargerCreator.Creator.Invoke();
+                        AbstractCreator<ICharger> chargerCreator = chargerCreators[ChooseCreator("Choose charger:", chargerCreators)];
+                        ICharger charger = chargerCreator.Creator.Invoke();
 
                         charger?.Charge(mobile);
                         break;

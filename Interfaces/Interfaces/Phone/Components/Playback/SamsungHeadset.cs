@@ -2,10 +2,13 @@
 
 namespace Interfaces.Phone.Components.Playback
 {
-    public class SamsungHeadset : PlaybackBase
+    public class SamsungHeadset : IPlayback
     {
-        public SamsungHeadset(IOutput output) : base(output)
+        protected IOutput output;
+
+        public SamsungHeadset(IOutput output)
         {
+            this.output = output;
         }
 
         public override void Play(object data)

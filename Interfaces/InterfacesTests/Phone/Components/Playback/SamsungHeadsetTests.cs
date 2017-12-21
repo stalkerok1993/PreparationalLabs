@@ -16,7 +16,9 @@ namespace Interfaces.Phone.Components.Playback.Tests
             mobile.PlaybackComponent = playback;
             mobile.Play(new object());
 
-            Assert.IsTrue(output.Output.ToUpper().Contains("SOUND"));
+            string playbackOutput = output.Output.ToUpper();
+            Assert.IsTrue(playbackOutput.Contains("SOUND"));
+            Assert.IsTrue(playbackOutput.Contains("SAMSUNG"));
         }
     }
 }

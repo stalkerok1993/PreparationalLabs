@@ -2,13 +2,13 @@
 
 namespace Interfaces.Phone.Components.Charger
 {
-    public class FastCharger : ICharger
+    public class OrdinaryCharger : ICharger
     {
         public Mobile Mobile { get; protected set; }
 
-        private IOutput output;
+        protected IOutput output;
 
-        public FastCharger(IOutput output)
+        public OrdinaryCharger(IOutput output)
         {
             this.output = output;
         }
@@ -16,7 +16,7 @@ namespace Interfaces.Phone.Components.Charger
         public override void Charge(Mobile mobile)
         {
             Mobile = mobile;
-            output.WriteLine($"{typeof(Mobile).Name} is charging with {nameof(FastCharger)}.");
+            output.WriteLine($"{typeof(Mobile).Name} is charging with {nameof(OrdinaryCharger)}.");
         }
     }
 }

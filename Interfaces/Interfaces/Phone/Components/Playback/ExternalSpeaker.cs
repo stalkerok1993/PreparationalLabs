@@ -2,10 +2,13 @@
 
 namespace Interfaces.Phone.Components.Playback
 {
-    public class ExternalSpeaker : PlaybackBase
+    public class ExternalSpeaker : IPlayback
     {
-        public ExternalSpeaker(IOutput output) : base(output)
+        protected IOutput output;
+
+        public ExternalSpeaker(IOutput output)
         {
+            this.output = output;
         }
 
         public override void Play(object data)

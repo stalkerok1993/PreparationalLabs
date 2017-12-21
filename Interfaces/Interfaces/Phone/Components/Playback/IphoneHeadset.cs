@@ -2,10 +2,13 @@
 
 namespace Interfaces.Phone.Components.Playback
 {
-    public class IphoneHeadset : PlaybackBase
+    public class IphoneHeadset : IPlayback
     {
-        public IphoneHeadset(IOutput output) : base(output)
+        protected IOutput output;
+
+        public IphoneHeadset(IOutput output)
         {
+            this.output = output;
         }
 
         public override void Play(object data)

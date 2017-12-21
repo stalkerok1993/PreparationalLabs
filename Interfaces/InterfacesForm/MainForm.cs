@@ -15,8 +15,8 @@ namespace InterfacesForm
 
         private IOutput output;
         private Mobile mobile;
-        private Dictionary<RadioButton, AbstractCreator<PlaybackBase>> playbackCreators;
-        private Dictionary<RadioButton, AbstractCreator<ChargerBase>> chargerCreators;
+        private Dictionary<RadioButton, AbstractCreator<IPlayback>> playbackCreators;
+        private Dictionary<RadioButton, AbstractCreator<ICharger>> chargerCreators;
 
         public MainForm()
         {
@@ -25,17 +25,17 @@ namespace InterfacesForm
             output = new TextBoxOutput(textBoxOutput);
             mobile = new ModernMobile(output);
 
-            playbackCreators = new Dictionary<RadioButton, AbstractCreator<PlaybackBase>>()
+            playbackCreators = new Dictionary<RadioButton, AbstractCreator<IPlayback>>()
             {
                 {radioButtonPlaybackSpeaker, (output) => new ExternalSpeaker(output)},
                 {radioButtonPlaybackIphone, (output) => new IphoneHeadset(output)},
                 {radioButtonPlaybackSamsung, (output) => new SamsungHeadset(output)},
                 {radioButtonPlaybackUnofficialIphone, (output) => new UnofficialIphoneHeadset(output)}
             };
-            chargerCreators = new Dictionary<RadioButton, AbstractCreator<ChargerBase>>()
+            chargerCreators = new Dictionary<RadioButton, AbstractCreator<ICharger>>()
             {
                 {radioButtonChargerFast, (output) => new FastCharger(output) },
-                {radioButtonChargerUsb, (output) => new USBCharger(output) }
+                {radioButtonChargerUsb, (output) => new OrdinaryCharger(output) }
             };
         }
 
@@ -47,7 +47,7 @@ namespace InterfacesForm
 
         private void buttonPlaybackUnplug_Click(object sender, System.EventArgs e)
         {
-            PlaybackBase unpluggedPlayback = mobile.PlaybackComponent;
+            IPlayback unpluggedPlayback = mobile.PlaybackComponent;
             mobile.PlaybackComponent = null;
             if (unpluggedPlayback != null)
             {
@@ -59,7 +59,7 @@ namespace InterfacesForm
 
         private void buttonChargerUnplug_Click(object sender, System.EventArgs e)
         {
-            ChargerBase unpluggedCharger = mobile.Charger;
+            ICharger unpluggedCharger = mobile.Charger;
             mobile.Charge(null);
             if (unpluggedCharger != null)
             {
@@ -72,7 +72,7 @@ namespace InterfacesForm
         private void buttonPlaybackPlug_Click(object sender, System.EventArgs e)
         {
             RadioButton radioButtonChecked = playbackCreators.Keys.Where((rb) => rb.Checked).First();
-            AbstractCreator<PlaybackBase> playbackCreator = playbackCreators[radioButtonChecked];
+            AbstractCreator<IPlayback> playbackCreator = playbackCreators[radioButtonChecked];
             if (playbackCreator != null)
             {
                 mobile.PlaybackComponent = playbackCreator.Invoke(output);
@@ -84,7 +84,7 @@ namespace InterfacesForm
         private void buttonChargerPlug_Click(object sender, System.EventArgs e)
         {
             RadioButton radioButtonChecked = chargerCreators.Keys.Where((rb) => rb.Checked).First();
-            AbstractCreator<ChargerBase> chargerCreator = chargerCreators[radioButtonChecked];
+            AbstractCreator<ICharger> chargerCreator = chargerCreators[radioButtonChecked];
             if (chargerCreators != null)
             {
                 mobile.Charge(chargerCreator.Invoke(output));

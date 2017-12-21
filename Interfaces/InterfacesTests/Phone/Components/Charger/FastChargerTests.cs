@@ -15,7 +15,9 @@ namespace Interfaces.Phone.Components.Charger.Tests
 
             mobile.Charge(charger);
 
-            Assert.IsTrue(output.Output.ToUpper().Contains("CHARGING"));
+            string chargerOutput = output.Output.ToUpper();
+            Assert.IsTrue(chargerOutput.Contains("CHARGING"));
+            Assert.IsTrue(chargerOutput.Contains("FAST"));
         }
     }
 }

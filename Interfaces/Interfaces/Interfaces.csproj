@@ -51,11 +51,11 @@
     <Compile Include="Phone\Components\Battery.cs" />
     <Compile Include="Phone\Components\Camera.cs" />
     <Compile Include="Phone\Components\Charger\FastCharger.cs" />
-    <Compile Include="Phone\Components\Charger\ChargerBase.cs" />
-    <Compile Include="Phone\Components\Charger\USBCharger.cs" />
+    <Compile Include="Phone\Components\Charger\ICharger.cs" />
+    <Compile Include="Phone\Components\Charger\OrdinaryCharger.cs" />
     <Compile Include="Phone\Components\Playback\ExternalSpeaker.cs" />
     <Compile Include="Phone\Components\Playback\IphoneHeadset.cs" />
-    <Compile Include="Phone\Components\Playback\PlaybackBase.cs" />
+    <Compile Include="Phone\Components\Playback\IPlayback.cs" />
     <Compile Include="Phone\Components\Playback\SamsungHeadset.cs" />
     <Compile Include="Phone\Components\Playback\UnofficialIphoneHeadset.cs" />
     <Compile Include="Phone\Components\Screen\ColorfulScreen.cs" />

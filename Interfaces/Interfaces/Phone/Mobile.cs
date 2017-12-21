@@ -21,9 +21,9 @@ namespace Interfaces.Phone
 
         public abstract ScreenBase Screen { get; }
 
-        public PlaybackBase PlaybackComponent { get; set; }
+        public IPlayback PlaybackComponent { get; set; }
 
-        public ChargerBase Charger { get; private set; }
+        public ICharger Charger { get; private set; }
 
         protected IOutput output;
 
@@ -53,7 +53,7 @@ namespace Interfaces.Phone
             PlaybackComponent?.Play(data);
         }
 
-        public void Charge(ChargerBase charger)
+        public void Charge(ICharger charger)
         {
             Charger = charger;
             Charger?.Charge(this);
