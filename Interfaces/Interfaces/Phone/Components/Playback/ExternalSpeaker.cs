@@ -11,7 +11,7 @@ namespace Interfaces.Phone.Components.Playback
             this.output = output;
         }
 
-        public override void Play(object data)
+        public void Play(object data)
         {
             output.WriteLine($"{nameof(ExternalSpeaker)} sound.");
         }

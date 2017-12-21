@@ -1,10 +1,7 @@
-﻿using Interfaces.Phone;
-using Interfaces.Output;
-
-namespace Interfaces.Phone.Components.Charger
+﻿namespace Interfaces.Phone.Components.Charger
 {
-    public abstract class ICharger
+    public interface ICharger
     {
-        public abstract void Charge(Mobile mobile);
+        void Charge(Mobile mobile);
     }
 }

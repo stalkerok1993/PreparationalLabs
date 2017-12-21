@@ -1,9 +1,7 @@
-﻿using Interfaces.Output;
-
-namespace Interfaces.Phone.Components.Playback
+﻿namespace Interfaces.Phone.Components.Playback
 {
-    public abstract class IPlayback
+    public interface IPlayback
     {
-        public abstract void Play(object data);
+        void Play(object data);
     }
 }

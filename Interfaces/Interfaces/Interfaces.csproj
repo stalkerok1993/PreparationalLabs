@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{542B75A2-A14E-4355-8257-78C1265BF1EE}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>UnderstandingOop</RootNamespace>
-    <AssemblyName>UnderstandingOop</AssemblyName>
+    <RootNamespace>Interfaces</RootNamespace>
+    <AssemblyName>Interfaces</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

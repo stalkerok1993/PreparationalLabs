@@ -10,10 +10,10 @@ namespace InterfacesConsole
 {
     class Program
     {
-        public static IOutput output = new ConsoleOutput();
+        public static readonly IOutput output = new ConsoleOutput();
         //output = new FileOutput(new System.IO.StreamWriter("output.txt")); // TODO: uncomment this to test other outputs
 
-        private static Dictionary<char, AbstractCreator<IPlayback>> playbackCreators = new Dictionary<char, AbstractCreator<IPlayback>>()
+        private static readonly Dictionary<char, AbstractCreator<IPlayback>> playbackCreators = new Dictionary<char, AbstractCreator<IPlayback>>()
         {
             {'1', new AbstractCreator<IPlayback>() {Name = "External speaker", Creator = () => new ExternalSpeaker(output)} },
             {'2', new AbstractCreator<IPlayback>() {Name = "iPhone headset", Creator = () => new IphoneHeadset(output)} },
@@ -22,10 +22,10 @@ namespace InterfacesConsole
             {'0', new AbstractCreator<IPlayback>() {Name = "Unplug playback", Creator = () => null, IsConfirmationNeeded = true} },
         };
 
-        private static Dictionary<char, AbstractCreator<ICharger>> chargerCreators = new Dictionary<char, AbstractCreator<ICharger>>()
+        private static readonly Dictionary<char, AbstractCreator<ICharger>> chargerCreators = new Dictionary<char, AbstractCreator<ICharger>>()
         {
             {'1', new AbstractCreator<ICharger>() {Name = "Fast charger", Creator = () => new FastCharger(output)} },
-            {'2', new AbstractCreator<ICharger>() {Name = "USB charger", Creator = () => new OrdinaryCharger(output)} },
+            {'2', new AbstractCreator<ICharger>() {Name = "Ordinary charger", Creator = () => new OrdinaryCharger(output)} },
             {'0', new AbstractCreator<ICharger>() {Name = "Unplug charger", Creator = () => null, IsConfirmationNeeded = true} }
         };
 

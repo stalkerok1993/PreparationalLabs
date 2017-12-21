@@ -13,7 +13,7 @@ namespace Interfaces.Phone.Components.Charger
             this.output = output;
         }
 
-        public override void Charge(Mobile mobile)
+        public void Charge(Mobile mobile)
         {
             Mobile = mobile;
             output.WriteLine($"{typeof(Mobile).Name} is charging with {nameof(OrdinaryCharger)}.");
