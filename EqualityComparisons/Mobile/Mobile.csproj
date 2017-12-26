@@ -54,10 +54,14 @@
     <Compile Include="Output\IOutput.cs" />
     <Compile Include="Output\TextBoxOutput.cs" />
     <Compile Include="Phone\Components\Battery.cs" />
+    <Compile Include="Phone\Components\CallList\Call.cs" />
+    <Compile Include="Phone\Components\CallList\CallTime.cs" />
+    <Compile Include="Phone\Components\CallList\SortedList.cs" />
     <Compile Include="Phone\Components\Camera.cs" />
     <Compile Include="Phone\Components\Charger\FastCharger.cs" />
     <Compile Include="Phone\Components\Charger\ChargerBase.cs" />
     <Compile Include="Phone\Components\Charger\OrdinaryCharger.cs" />
+    <Compile Include="Phone\Components\PhoneBook\Contact.cs" />
     <Compile Include="Phone\Components\Playback\ExternalSpeaker.cs" />
     <Compile Include="Phone\Components\Playback\IphoneHeadset.cs" />
     <Compile Include="Phone\Components\Playback\PlaybackBase.cs" />

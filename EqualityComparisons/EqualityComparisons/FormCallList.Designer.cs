@@ -25,9 +25,9 @@
         private void InitializeComponent() {
             this.buttonToggleIncoming = new System.Windows.Forms.Button();
             this.listViewCalls = new System.Windows.Forms.ListView();
+            this.columnHeaderType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderPhone = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeaderType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.buttonAccept = new System.Windows.Forms.Button();
             this.buttonReject = new System.Windows.Forms.Button();
@@ -62,6 +62,11 @@
             this.listViewCalls.UseCompatibleStateImageBehavior = false;
             this.listViewCalls.View = System.Windows.Forms.View.Details;
             // 
+            // columnHeaderType
+            // 
+            this.columnHeaderType.Text = "Type";
+            this.columnHeaderType.Width = 40;
+            // 
             // columnHeaderName
             // 
             this.columnHeaderName.Text = "Name";
@@ -71,11 +76,6 @@
             // 
             this.columnHeaderPhone.Text = "Phone";
             this.columnHeaderPhone.Width = 120;
-            // 
-            // columnHeaderType
-            // 
-            this.columnHeaderType.Text = "Type";
-            this.columnHeaderType.Width = 40;
             // 
             // columnHeaderTime
             // 
@@ -126,7 +126,7 @@
             this.Controls.Add(this.listViewCalls);
             this.Controls.Add(this.buttonToggleIncoming);
             this.Name = "FormCallList";
-            this.Text = "Call list";
+            this.Text = "Call List";
             this.ResumeLayout(false);
 
         }

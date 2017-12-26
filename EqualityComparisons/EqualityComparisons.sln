@@ -5,10 +5,6 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mobile", "Mobile\Mobile.csproj", "{542B75A2-A14E-4355-8257-78C1265BF1EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfacesForm", "InterfacesForm\InterfacesForm.csproj", "{A682DD8F-F0F9-4B95-AC1F-DF9936E31F9A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfacesConsole", "InterfacesConsole\InterfacesConsole.csproj", "{71921D3E-687E-4DCE-8685-10A14A1DC657}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileTests", "InterfacesTests\MobileTests.csproj", "{90FA4709-92D3-4C64-AE0C-0B70225D10D0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1A31285D-2720-4282-A80D-65CEBEC7A2E6}"
@@ -16,9 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		InterfacesTests\Interfaces.Tests.csproj = InterfacesTests\Interfaces.Tests.csproj
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventsDelegatesForm", "EventsDelegatesForm\EventsDelegatesForm.csproj", "{9A2D66C0-DA14-4F72-8AC2-24121D977FE2}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqCollectionsForm", "LinqCollectionsForm\LinqCollectionsForm.csproj", "{A03755C3-FD22-46C6-A522-D26245B2427C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EqualityComparisons", "EqualityComparisons\EqualityComparisons.csproj", "{DB05B12B-E20D-44BF-9031-6FC06D21C5AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,26 +24,14 @@ Global
 		{542B75A2-A14E-4355-8257-78C1265BF1EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{542B75A2-A14E-4355-8257-78C1265BF1EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{542B75A2-A14E-4355-8257-78C1265BF1EE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A682DD8F-F0F9-4B95-AC1F-DF9936E31F9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A682DD8F-F0F9-4B95-AC1F-DF9936E31F9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A682DD8F-F0F9-4B95-AC1F-DF9936E31F9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A682DD8F-F0F9-4B95-AC1F-DF9936E31F9A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{71921D3E-687E-4DCE-8685-10A14A1DC657}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{71921D3E-687E-4DCE-8685-10A14A1DC657}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{71921D3E-687E-4DCE-8685-10A14A1DC657}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{71921D3E-687E-4DCE-8685-10A14A1DC657}.Release|Any CPU.Build.0 = Release|Any CPU
 		{90FA4709-92D3-4C64-AE0C-0B70225D10D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{90FA4709-92D3-4C64-AE0C-0B70225D10D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90FA4709-92D3-4C64-AE0C-0B70225D10D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90FA4709-92D3-4C64-AE0C-0B70225D10D0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9A2D66C0-DA14-4F72-8AC2-24121D977FE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9A2D66C0-DA14-4F72-8AC2-24121D977FE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9A2D66C0-DA14-4F72-8AC2-24121D977FE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9A2D66C0-DA14-4F72-8AC2-24121D977FE2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A03755C3-FD22-46C6-A522-D26245B2427C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A03755C3-FD22-46C6-A522-D26245B2427C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A03755C3-FD22-46C6-A522-D26245B2427C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A03755C3-FD22-46C6-A522-D26245B2427C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB05B12B-E20D-44BF-9031-6FC06D21C5AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB05B12B-E20D-44BF-9031-6FC06D21C5AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB05B12B-E20D-44BF-9031-6FC06D21C5AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB05B12B-E20D-44BF-9031-6FC06D21C5AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
