@@ -46,6 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Date\IDateProvider.cs" />
+    <Compile Include="Date\SystemDatePrivider.cs" />
+    <Compile Include="Formatter\FormatterSimpleFactory.cs" />
     <Compile Include="Output\ConsoleOutput.cs" />
     <Compile Include="Output\FileOutput.cs" />
     <Compile Include="Output\IOutput.cs" />
@@ -54,7 +57,7 @@
     <Compile Include="Phone\Components\Camera.cs" />
     <Compile Include="Phone\Components\Charger\FastCharger.cs" />
     <Compile Include="Phone\Components\Charger\ChargerBase.cs" />
-    <Compile Include="Phone\Components\Charger\USBCharger.cs" />
+    <Compile Include="Phone\Components\Charger\OrdinaryCharger.cs" />
     <Compile Include="Phone\Components\Playback\ExternalSpeaker.cs" />
     <Compile Include="Phone\Components\Playback\IphoneHeadset.cs" />
     <Compile Include="Phone\Components\Playback\PlaybackBase.cs" />

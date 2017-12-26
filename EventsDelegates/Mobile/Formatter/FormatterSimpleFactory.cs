@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Mobile.Date;
+using System.Data;
+using UnderstandingOop.Date;
 
-namespace Mobile.Formatter {
+namespace UnderstandingOop.Formatter {
     public class FormatterSimpleFactory {
         public delegate string Formatter(string message);
 
@@ -12,7 +13,8 @@ namespace Mobile.Formatter {
 
         public IEnumerable<string> AvailableNames => formatters.Keys;
 
-        public FormatterSimpleFactory(IDateProvider dateProvider) {
+        public FormatterSimpleFactory(IDateProvider dateProvider)
+        {
             formatters = new Dictionary<string, Formatter>()
             {
                 {"Start with DateTime", (message) => $"[{dateProvider?.Now}] {message}"},

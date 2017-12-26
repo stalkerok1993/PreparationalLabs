@@ -5,34 +5,28 @@ using Mobile.Phone.Network;
 using System.Threading;
 using System.Collections.Generic;
 using System;
+using System.Linq;
+using UnderstandingOop.Date;
+using UnderstandingOop.Formatter;
 
 namespace EventsDelegatesForm
 {
     public partial class MessageFormatting : Form
     {
-        private delegate string Formatter(string message);
-
         private IOutput output;
         private MobileBase mobile;
 
-        private Formatter currentFormatter;
-        private Dictionary<string, Formatter> formatters = new Dictionary<string, Formatter>()
-        {
-            {"Start with DateTime", FormatWithTime},
-            {"End with DateTime", (message) => $"{message} [{DateTime.Now}]" },
-            {"Custom", (message) => $"SMS: {message.Trim()}" },
-            {"Lowercase", (message) => message.ToLower() },
-            {"Uppercase", (message) => message.ToUpper() },
-        };
+        private readonly FormatterSimpleFactory formatterFactory = new FormatterSimpleFactory(new SystemDatePrivider());
+        private FormatterSimpleFactory.Formatter currentFormatter;
 
         public MessageFormatting()
         {
             InitializeComponent();
 
             comboBoxFormatters.SelectedIndex = 0;
-            foreach (string key in formatters.Keys)
+            foreach (string formatterName in formatterFactory.AvailableNames)
             {
-                comboBoxFormatters.Items.Add(key);
+                comboBoxFormatters.Items.Add(formatterName);
             }
 
             output = new TextBoxOutput(richTextBoxOutput);
@@ -64,15 +58,15 @@ namespace EventsDelegatesForm
         private void comboBoxFormatters_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboBox cbSender = sender as ComboBox;
-            string selectedKey = cbSender?.SelectedItem.ToString();
+            string selectedFormatterName = cbSender?.SelectedItem.ToString();
 
-            if (formatters.ContainsKey(selectedKey))
+            if (formatterFactory.AvailableNames.Contains(selectedFormatterName))
             {
-                currentFormatter = formatters[selectedKey];
+                currentFormatter = formatterFactory.CreateFormatter(selectedFormatterName);
             }
             else
             {
-                currentFormatter = (message) => message;
+                currentFormatter = formatterFactory.DefaultFormatter;
             }
         }
     }

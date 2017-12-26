@@ -56,8 +56,10 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Formatter\FormatterSimpleFactoryTests.cs" />
     <Compile Include="Phone\Components\Charger\FastChargerTests.cs" />
-    <Compile Include="Phone\Components\Charger\UsbChargerTests.cs" />
+    <Compile Include="Phone\Components\Charger\OrdinaryChargerTests.cs" />
+    <Compile Include="Phone\Components\Misc\FixedDateProvider.cs" />
     <Compile Include="Phone\Components\Misc\OutputMock.cs" />
     <Compile Include="Phone\Components\Misc\PhoneStub.cs" />
     <Compile Include="Phone\Components\Playback\ExternalSpeakerTests.cs" />

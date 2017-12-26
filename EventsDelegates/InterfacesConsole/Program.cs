@@ -24,7 +24,7 @@ namespace InterfacesConsole
         private static Dictionary<char, AbstractCreator<ChargerBase>> chargerCreators = new Dictionary<char, AbstractCreator<ChargerBase>>()
         {
             {'1', new AbstractCreator<ChargerBase>() {Name = "Fast charger", Creator = () => new FastCharger(output)} },
-            {'2', new AbstractCreator<ChargerBase>() {Name = "USB charger", Creator = () => new USBCharger(output)} },
+            {'2', new AbstractCreator<ChargerBase>() {Name = "USB charger", Creator = () => new OrdinaryCharger(output)} },
             {'0', new AbstractCreator<ChargerBase>() {Name = "Unplug charger", Creator = () => null, IsConfirmationNeeded = true} }
         };
 

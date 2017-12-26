@@ -4,18 +4,20 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Mobile.Phone.Components.Charger.Tests
 {
     [TestClass()]
-    public class UsbChargerTests
+    public class OrdinaryChargerTests
     {
         [TestMethod()]
         public void ChargeTest()
         {
             var output = new OutputMock();
             var mobile = new PhoneStub(output);
-            var charger = new USBCharger(output);
+            var charger = new OrdinaryCharger(output);
 
             mobile.Charge(charger);
 
-            Assert.IsTrue(output.Output.ToUpper().Contains("CHARGING"));
+            string chargerOutput = output.Output.ToUpper();
+            Assert.IsTrue(chargerOutput.Contains("CHARGING"));
+            Assert.IsTrue(chargerOutput.Contains("ORDINARY"));
         }
     }
 }

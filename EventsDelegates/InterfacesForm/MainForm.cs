@@ -34,7 +34,7 @@ namespace InterfacesForm
             chargerCreators = new Dictionary<RadioButton, AbstractCreator<ChargerBase>>()
             {
                 {radioButtonChargerFast, (output) => new FastCharger(output) },
-                {radioButtonChargerUsb, (output) => new USBCharger(output) }
+                {radioButtonChargerUsb, (output) => new OrdinaryCharger(output) }
             };
         }
 

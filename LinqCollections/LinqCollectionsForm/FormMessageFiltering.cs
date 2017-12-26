@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using Mobile.Date;
 using Mobile.Formatter;
 
 using Message = Mobile.Phone.NetworkServices.SMS.Message;
@@ -11,7 +12,8 @@ namespace LinqCollectionsForm {
             InitializeComponent();
 
             comboBoxFormatter.SelectedIndex = 0;
-            comboBoxFormatter.Items.AddRange(FormatterSimpleFactory.AvailableNames.ToArray());
+            var formatterFactory = new FormatterSimpleFactory(new SystemDatePrivider());
+            comboBoxFormatter.Items.AddRange(formatterFactory.AvailableNames.ToArray());
         }
 
         public void ShowMessages(List<Message> messages)

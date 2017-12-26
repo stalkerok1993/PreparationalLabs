@@ -1,21 +1,20 @@
 ﻿using MobileTest.Phone.Components.Misc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Mobile.Phone.Components.Charger.Tests
-{
+namespace Mobile.Phone.Components.Charger.Tests {
     [TestClass()]
-    public class FastChargerTests
-    {
+    public class FastChargerTests {
         [TestMethod()]
-        public void ChargeTest()
-        {
+        public void ChargeTest() {
             var output = new OutputMock();
             var mobile = new PhoneStub(output);
             var charger = new FastCharger(output);
 
             mobile.Charge(charger);
 
-            Assert.IsTrue(output.Output.ToUpper().Contains("CHARGING"));
+            string chargerOutput = output.Output.ToUpper();
+            Assert.IsTrue(chargerOutput.Contains("CHARGING"));
+            Assert.IsTrue(chargerOutput.Contains("FAST"));
         }
     }
 }
