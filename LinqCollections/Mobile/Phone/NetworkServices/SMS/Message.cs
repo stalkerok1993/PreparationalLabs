@@ -2,16 +2,19 @@
 
 namespace Mobile.Phone.NetworkServices.SMS {
     public class Message {
-        public string Number { get; set; }
-        public string User { get; set; }
+        public string Number { get; private set; }
+
         public string Text { get; set; }
+
         public DateTime ReceivingTime { get; set; }
 
-        public Message(string text, string number = null, string user = null, DateTime? receivingTime = null)
+        public bool IsIncoming { get; set; }
+
+        public Message(string text, string number = null, bool isIncoming = true, DateTime? receivingTime = null)
         {
-            Text = text;
+            Text = text ?? "";
             Number = number;
-            User = user;
+            IsIncoming = isIncoming;
             ReceivingTime = receivingTime ?? DateTime.Now;
         }
     }

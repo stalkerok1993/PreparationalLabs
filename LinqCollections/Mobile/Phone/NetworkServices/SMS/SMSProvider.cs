@@ -1,6 +1,6 @@
 ﻿namespace Mobile.Phone.NetworkServices.SMS
 {
-    public class SMSProvider
+    internal class SMSProvider
     {
         public delegate void SMSRecieverDelegate(Message message);
 

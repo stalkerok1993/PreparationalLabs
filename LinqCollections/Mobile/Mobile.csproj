@@ -88,6 +88,7 @@
     <Compile Include="Phone\MobileBase.cs" />
     <Compile Include="Phone\ModernMobile.cs" />
     <Compile Include="Phone\NetworkServices\SMS\Message.cs" />
+    <Compile Include="Phone\NetworkServices\SMS\SMSMessenger.cs" />
     <Compile Include="Phone\NetworkServices\SMS\SMSProvider.cs" />
     <Compile Include="Phone\SimCorpMobile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

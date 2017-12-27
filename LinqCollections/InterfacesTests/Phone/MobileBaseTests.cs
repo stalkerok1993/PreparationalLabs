@@ -13,10 +13,9 @@ namespace Mobile.Phone.Tests
             bool isRecieved = false;
             var output = new OutputMock();
             var mobile = new PhoneStub(output);
-            mobile.SMSProvider = new SMSProvider();
-            mobile.SMSProvider.SMSReciever += (message) => isRecieved = true;
+            mobile.SMSMessenger.MessageAdded += (message, isAdded) => isRecieved = true;
 
-            mobile.ReceiveSMS(null);
+            mobile.ReceiveSMS(null, "");
 
             Assert.IsTrue(isRecieved);
         }
@@ -28,10 +27,9 @@ namespace Mobile.Phone.Tests
             string recieved = null;
             var output = new OutputMock();
             var mobile = new PhoneStub(output);
-            mobile.SMSProvider = new SMSProvider();
-            mobile.SMSProvider.SMSReciever += (message) => recieved = message.Text;
+            mobile.SMSMessenger.MessageAdded += (message, isAdded) => recieved = message.Text;
 
-            mobile.ReceiveSMS(new Message(testSms));
+            mobile.ReceiveSMS(testSms, null);
 
             Assert.AreEqual(testSms, recieved);
         }

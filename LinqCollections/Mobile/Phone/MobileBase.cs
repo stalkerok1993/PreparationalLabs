@@ -12,6 +12,7 @@ namespace Mobile.Phone
 {
     public abstract class MobileBase
     {
+        internal SMSProvider SMSProvider = new SMSProvider();
         protected IOutput output;
 
         public Battery Battery { get; set; }
@@ -28,11 +29,13 @@ namespace Mobile.Phone
 
         public ChargerBase Charger { get; private set; }
 
-        public SMSProvider SMSProvider { get; set; }
+        public readonly SMSMessenger SMSMessenger = new SMSMessenger();
 
-        public MobileBase(IOutput output)
+        protected MobileBase(IOutput output)
         {
             this.output = output;
+
+            SMSProvider.SMSReciever += SMSMessenger.AddMessage;
         }
 
         public void Show(IScreenImage screenImage)
@@ -62,9 +65,15 @@ namespace Mobile.Phone
             Charger?.Charge(this);
         }
 
-        public void ReceiveSMS(Message message)
+        public void ReceiveSMS(string text, string number)
         {
-            SMSProvider?.RaiseSMSRecieverEvent(message);
+            SMSProvider.RaiseSMSRecieverEvent(new Message(text, number));
+        }
+
+        public void SendSMS(string text, string number) {
+            if (number != null) {
+                SMSMessenger.SendMessage(text, number);
+            }
         }
     }
 }

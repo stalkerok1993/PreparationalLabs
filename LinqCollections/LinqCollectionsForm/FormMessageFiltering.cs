@@ -3,27 +3,26 @@ using System.Linq;
 using System.Windows.Forms;
 using Mobile.Date;
 using Mobile.Formatter;
-
 using Message = Mobile.Phone.NetworkServices.SMS.Message;
 using Mobile.Output;
 using Mobile.Phone;
 using static Mobile.Formatter.FormatterSimpleFactory;
-using Mobile.Phone.NetworkServices.SMS;
 using System;
+using System.Globalization;
 using System.Threading;
 
 namespace LinqCollectionsForm {
     public partial class FormMessageFiltering : Form {
-        private IOutput output;
-        private MobileBase mobile;
+        private readonly IOutput output = new NullOutput();
+        private readonly MobileBase mobile;
 
-        private FormatterSimpleFactory formatterFactory = new FormatterSimpleFactory(new SystemDatePrivider());
+        private readonly FormatterSimpleFactory formatterFactory = new FormatterSimpleFactory(new SystemDatePrivider());
         private Formatter currentFormatter;
 
-        private List<MessageCriteriaSelector> criteriaSelectors;
+        private readonly List<MessageCriteriaSelector> criteriaSelectors;
 
-        private const int MAXIMUM_CACHED = 100;
-        private List<Message> recievedMessages = new List<Message>();
+        private const int MAXIMUM_OUTPUT = 100;
+        private List<Message> messageHistoryCopy;
 
         public FormMessageFiltering() {
             InitializeComponent();
@@ -43,17 +42,15 @@ namespace LinqCollectionsForm {
             };
             currentFormatter = formatterFactory.DefaultFormatter;
 
-            output = new NullOutput();
             mobile = new ModernMobile(output);
-            mobile.SMSProvider = new SMSProvider();
-            mobile.SMSProvider.SMSReciever += (message) => {
-                recievedMessages.Add(message);
-                if (recievedMessages.Count > MAXIMUM_CACHED) {
-                    recievedMessages.RemoveRange(0, recievedMessages.Count - MAXIMUM_CACHED);
+            mobile.SMSMessenger.MessageAdded += (message, isAdded) => {
+                messageHistoryCopy = mobile.SMSMessenger.MessageHistory;
+                if (messageHistoryCopy.Count > MAXIMUM_OUTPUT) {
+                    mobile.SMSMessenger.RemoveRange(0, messageHistoryCopy.Count - MAXIMUM_OUTPUT);
                 }
 
                 try {
-                    Invoke(new Action(() => ShowMessages(FilterMessages(recievedMessages).ToList())));
+                    Invoke(new Action(RefreshListView));
                 }
                 catch (ObjectDisposedException) {
                 }
@@ -62,14 +59,14 @@ namespace LinqCollectionsForm {
             new Thread(() => {
                 int notMainThreadSmsCount = 1;
                 System.Threading.Timer notMainThreadTimer = new System.Threading.Timer((sender) => {
-                    mobile.ReceiveSMS(new Message($"SMS #{notMainThreadSmsCount++} NOT from Main thread."));
-                }, null, 1000, 3000);
+                    mobile.ReceiveSMS($"SMS #{notMainThreadSmsCount++} NOT from Main thread.", "700");
+                }, null, 500, 2000);
             }).Start();
         }
 
         private int smsCount = 1;
         private void timerInMainThread_Tick(object sender, System.EventArgs e) {
-            mobile.ReceiveSMS(new Message($"SMS #{smsCount++} from Main thread."));
+            mobile.ReceiveSMS($"SMS #{smsCount++} from Main thread.", "800");
         }
 
         private static string FormatWithTime(string message) {
@@ -85,7 +82,7 @@ namespace LinqCollectionsForm {
 
         private sealed class MessageCriteriaSelector {
             public Func<Message, bool> Predicate { get; private set; }
-            private Func<bool> isUsed;
+            private readonly Func<bool> isUsed;
 
             public bool IsUsed => isUsed();
 
@@ -96,20 +93,53 @@ namespace LinqCollectionsForm {
         }
 
         private void buttonFilter_Click(object sender, EventArgs e) {
+            RefreshListView();
+        }
+
+        private void RefreshListView() {
+            ListViewState state = GetListViewState(listViewMessages);
+
+            ShowMessages(FilterMessages(messageHistoryCopy.GetRange(0, Math.Min(messageHistoryCopy.Count, MAXIMUM_OUTPUT))).ToList());
+
+            RestoreState(listViewMessages, state);
+        }
+
+        private ListViewState GetListViewState(ListView listView) {
+            ListViewState state = new ListViewState();
+            state.TopItemIndex = listView.TopItem?.Index ?? 0;
+            state.SelectedRowIds = new List<int>();
+            foreach (ListViewItem item in listView.SelectedItems) {
+                state.SelectedRowIds.Add(item.Index);
+            }
+
+            return state;
+        }
+
+        private void RestoreState(ListView listView, ListViewState state)
+        {
+            try {
+                listViewMessages.TopItem = listView.Items[state.TopItemIndex];
+                foreach (int selectedIx in state.SelectedRowIds) {
+                    listView.Items[selectedIx].Selected = true;
+                }
+            } catch { }
+        }
+
+        private void ShowMessages(IEnumerable<Message> messages) {
             listViewMessages.BeginUpdate();
 
             listViewMessages.Items.Clear();
-            ShowMessages(FilterMessages(recievedMessages).ToList());
+
+            foreach (Message message in messages) {
+                listViewMessages.Items.Add(new ListViewItem(new[] { currentFormatter(message.Text), message.Number, message.ReceivingTime.ToString(CultureInfo.InvariantCulture) }));
+            }
 
             listViewMessages.EndUpdate();
         }
 
-        private void ShowMessages(IEnumerable<Message> messages) {
-            listViewMessages.Items.Clear();
-
-            foreach (Message message in messages) {
-                listViewMessages.Items.Add(new ListViewItem(new[] { currentFormatter(message.Text) }));
-            }
+        private class ListViewState {
+            public int TopItemIndex { get; set; }
+            public List<int> SelectedRowIds { get; set; }
         }
 
         private IEnumerable<Message> FilterMessages(IEnumerable<Message> messages) {
@@ -121,17 +151,15 @@ namespace LinqCollectionsForm {
                     isUsed |= selector.IsUsed;
 
                     if (radioButtonAnd.Checked) {
-                        isSelected &= selector.IsUsed ? selector.Predicate(m) : true;
+                        isSelected &= !selector.IsUsed || selector.Predicate(m);
                     }
                     else {
-                        isSelected |= selector.IsUsed ? selector.Predicate(m) : false;
+                        isSelected |= selector.IsUsed && selector.Predicate(m);
                     }
                 }
 
                 return !isUsed || isSelected;
             });
         }
-
-        private int mainThreadSmsCount = 1;
     }
 }

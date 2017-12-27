@@ -34,6 +34,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.columnHeaderText = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.listViewMessages = new System.Windows.Forms.ListView();
+            this.columnHeaderNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.labelMessageContains = new System.Windows.Forms.Label();
             this.labelReceivedBefore = new System.Windows.Forms.Label();
             this.labelReceivedAfter = new System.Windows.Forms.Label();
@@ -145,13 +147,25 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewMessages.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeaderText});
+            this.columnHeaderText,
+            this.columnHeaderNumber,
+            this.columnHeaderTime});
+            this.listViewMessages.FullRowSelect = true;
             this.listViewMessages.Location = new System.Drawing.Point(12, 168);
             this.listViewMessages.Name = "listViewMessages";
             this.listViewMessages.Size = new System.Drawing.Size(381, 158);
             this.listViewMessages.TabIndex = 25;
             this.listViewMessages.UseCompatibleStateImageBehavior = false;
             this.listViewMessages.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeaderNumber
+            // 
+            this.columnHeaderNumber.Text = "Number";
+            // 
+            // columnHeaderTime
+            // 
+            this.columnHeaderTime.Text = "Time";
+            this.columnHeaderTime.Width = 120;
             // 
             // labelMessageContains
             // 
@@ -238,7 +252,7 @@
             // timerInMainThread
             // 
             this.timerInMainThread.Enabled = true;
-            this.timerInMainThread.Interval = 5000;
+            this.timerInMainThread.Interval = 3000;
             this.timerInMainThread.Tick += new System.EventHandler(this.timerInMainThread_Tick);
             // 
             // FormMessageFiltering
@@ -290,6 +304,8 @@
         private System.Windows.Forms.ComboBox comboBoxPhone;
         private System.Windows.Forms.ComboBox comboBoxFormatter;
         private System.Windows.Forms.Timer timerInMainThread;
+        private System.Windows.Forms.ColumnHeader columnHeaderNumber;
+        private System.Windows.Forms.ColumnHeader columnHeaderTime;
     }
 }
 
