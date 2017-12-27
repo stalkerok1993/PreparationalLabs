@@ -52,6 +52,7 @@
     <Compile Include="Output\ConsoleOutput.cs" />
     <Compile Include="Output\FileOutput.cs" />
     <Compile Include="Output\IOutput.cs" />
+    <Compile Include="Output\NullOutput.cs" />
     <Compile Include="Output\TextBoxOutput.cs" />
     <Compile Include="Phone\Components\Battery.cs" />
     <Compile Include="Phone\Components\Camera.cs" />
