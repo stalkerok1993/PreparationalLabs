@@ -13,22 +13,13 @@ namespace Mobile.Phone.NetworkServices.SMS {
 
         public List<Message> MessageHistory => messageHistory.ToList();
 
-        public void AddMessage(Message message)
+        public virtual void AddMessage(Message message)
         {
             messageHistory.Add(message);
             MessageAdded?.Invoke(message, true);
         }
 
-        public void SendMessage(string text, string number)
-        {
-            if (number != null)
-            {
-                var message = new Message(text, number, false);
-                AddMessage(message);
-            }
-        }
-
-        public void RemoveMessage(Message message)
+        public virtual void RemoveMessage(Message message)
         {
             if (messageHistory.Remove(message))
             {
@@ -36,7 +27,7 @@ namespace Mobile.Phone.NetworkServices.SMS {
             }
         }
 
-        public void RemoveRange(int start, int count) {
+        public virtual void RemoveRange(int start, int count) {
             messageHistory.RemoveRange(start, count);
         }
     }

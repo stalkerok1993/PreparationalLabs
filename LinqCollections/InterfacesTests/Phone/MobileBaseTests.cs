@@ -1,15 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Mobile.Phone.NetworkServices.SMS;
 using MobileTest.Phone.Components.Misc;
 
-namespace Mobile.Phone.Tests
-{
+namespace Mobile.Phone.Tests {
     [TestClass()]
-    public class MobileBaseTests
-    {
+    public class MobileBaseTests {
         [TestMethod()]
-        public void ReceiveSMSTrivialTest()
-        {
+        public void ReceiveSMSTrivialTest() {
             bool isRecieved = false;
             var output = new OutputMock();
             var mobile = new PhoneStub(output);
@@ -21,8 +17,7 @@ namespace Mobile.Phone.Tests
         }
 
         [TestMethod()]
-        public void ReceiveSMSTest()
-        {
+        public void ReceiveSMSTest() {
             string testSms = "Some random SMS asdf;ljkqweproijsdgkhbn";
             string recieved = null;
             var output = new OutputMock();
@@ -32,6 +27,11 @@ namespace Mobile.Phone.Tests
             mobile.ReceiveSMS(testSms, null);
 
             Assert.AreEqual(testSms, recieved);
+        }
+
+        [TestMethod()]
+        public void SendSMSTest() {
+            Assert.Fail();
         }
     }
 }

@@ -62,11 +62,15 @@
     <Compile Include="Phone\Components\Misc\FixedDateProvider.cs" />
     <Compile Include="Phone\Components\Misc\OutputMock.cs" />
     <Compile Include="Phone\Components\Misc\PhoneStub.cs" />
+    <Compile Include="Phone\Components\Misc\SMSMessangerMock.cs" />
     <Compile Include="Phone\Components\Playback\ExternalSpeakerTests.cs" />
     <Compile Include="Phone\Components\Playback\IphoneHeadsetTests.cs" />
     <Compile Include="Phone\Components\Playback\SamsungHeadsetTests.cs" />
     <Compile Include="Phone\Components\Playback\UnofficialIphoneHeadsetTests.cs" />
     <Compile Include="Phone\MobileBaseTests.cs" />
+    <Compile Include="Phone\NetworkServices\SMS\Filter\SMSFilterTests.cs" />
+    <Compile Include="Phone\NetworkServices\SMS\Filter\SMSSelectorSimpleFactoryTests.cs" />
+    <Compile Include="Phone\NetworkServices\SMS\SMSMessengerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

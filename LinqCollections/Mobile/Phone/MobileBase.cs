@@ -72,7 +72,8 @@ namespace Mobile.Phone
 
         public void SendSMS(string text, string number) {
             if (number != null) {
-                SMSMessenger.SendMessage(text, number);
+                var message = new Message(text, number, false);
+                SMSMessenger.AddMessage(message);
             }
         }
     }
