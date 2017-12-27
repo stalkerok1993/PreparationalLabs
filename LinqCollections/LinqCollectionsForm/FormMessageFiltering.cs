@@ -26,6 +26,8 @@ namespace LinqCollectionsForm {
         private const int MAXIMUM_OUTPUT = 100;
         private List<Message> messageHistoryCopy;
 
+        private readonly HashSet<string> phonesSet = new HashSet<string>();
+
         public FormMessageFiltering() {
             InitializeComponent();
 
@@ -36,9 +38,18 @@ namespace LinqCollectionsForm {
 
             mobile = new ModernMobile(output);
             mobile.SMSMessenger.MessageAdded += (message, isAdded) => {
-                messageHistoryCopy = mobile.SMSMessenger.MessageHistory;
-                if (messageHistoryCopy.Count > MAXIMUM_OUTPUT) {
-                    mobile.SMSMessenger.RemoveRange(0, messageHistoryCopy.Count - MAXIMUM_OUTPUT);
+                if (!phonesSet.Contains(message.Number)) {
+                    phonesSet.Add(message.Number);
+                    Invoke(new Action(() => comboBoxPhone.Items.Add(message.Number)));
+                }
+
+                if (mobile.SMSMessenger.MessageHistory.Count > MAXIMUM_OUTPUT) {
+                    List<Message> temp = mobile.SMSMessenger.MessageHistory;
+                    temp.RemoveRange(0, messageHistoryCopy.Count - MAXIMUM_OUTPUT);
+                    messageHistoryCopy = temp;
+                }
+                else {
+                    messageHistoryCopy = mobile.SMSMessenger.MessageHistory;
                 }
 
                 try {
