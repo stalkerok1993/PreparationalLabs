@@ -10,6 +10,7 @@ using static Mobile.Formatter.FormatterSimpleFactory;
 using System;
 using System.Globalization;
 using System.Threading;
+using Mobile.Phone.NetworkServices.SMS.Filter;
 
 namespace LinqCollectionsForm {
     public partial class FormMessageFiltering : Form {
@@ -19,7 +20,8 @@ namespace LinqCollectionsForm {
         private readonly FormatterSimpleFactory formatterFactory = new FormatterSimpleFactory(new SystemDatePrivider());
         private Formatter currentFormatter;
 
-        private readonly List<MessageCriteriaSelector> criteriaSelectors;
+        private static SMSSelectorComposite compositeSelector = (SMSSelectorComposite)new SMSSelectorSimpleFactory().CreateSelector("CompositeSelector");
+        private readonly SMSFilter filter = new SMSFilter(compositeSelector);
 
         private const int MAXIMUM_OUTPUT = 100;
         private List<Message> messageHistoryCopy;
@@ -29,17 +31,7 @@ namespace LinqCollectionsForm {
 
             comboBoxFormatter.SelectedIndex = 0;
             comboBoxFormatter.Items.AddRange(formatterFactory.AvailableNames.ToArray());
-
-            criteriaSelectors = new List<MessageCriteriaSelector>() {
-                new MessageCriteriaSelector((m) => m.Number?.ToUpper().Contains(comboBoxPhone.Text.Trim().ToUpper()) ?? false,
-                    () => comboBoxPhone.Text.Trim().Length > 0),
-                new MessageCriteriaSelector((m) => m.Text?.ToUpper().Contains(textBoxMessageContains.Text.Trim().ToUpper()) ?? false,
-                    () => textBoxMessageContains.Text.Trim().Length > 0),
-                new MessageCriteriaSelector((m) => m.ReceivingTime.CompareTo(dateTimePickerReceivedAfter.Value) >= 0,
-                    () => checkBoxReceivedAfter.Checked),
-                new MessageCriteriaSelector((m) => m.ReceivingTime.CompareTo(dateTimePickerReceivedAfter.Value) < 0,
-                    () => checkBoxReceivedBefore.Checked)
-            };
+            
             currentFormatter = formatterFactory.DefaultFormatter;
 
             mobile = new ModernMobile(output);
@@ -99,7 +91,20 @@ namespace LinqCollectionsForm {
         private void RefreshListView() {
             ListViewState state = GetListViewState(listViewMessages);
 
-            ShowMessages(FilterMessages(messageHistoryCopy.GetRange(0, Math.Min(messageHistoryCopy.Count, MAXIMUM_OUTPUT))).ToList());
+            SMSSelectorData data = new SMSSelectorData(textBoxMessageContains.Text, comboBoxPhone.Text);
+            data.ReceivedFrom = checkBoxReceivedAfter.Checked ? (DateTime?)dateTimePickerReceivedAfter.Value : null;
+            data.ReceivedTo = checkBoxReceivedBefore.Checked ? (DateTime?)dateTimePickerReceivedBefore.Value : null;
+
+            if (radioButtonAnd.Checked) {
+                compositeSelector.SelectorBooleanFunction = SMSSelectorComposite.SelectorBoolFunc.And;
+            }
+            else {
+                compositeSelector.SelectorBooleanFunction = SMSSelectorComposite.SelectorBoolFunc.Or;
+            }
+
+            List<Message> filtered = filter.Filter(messageHistoryCopy, data).ToList();
+            IEnumerable<Message> displayed = filtered.GetRange(0, Math.Min(filtered.Count, MAXIMUM_OUTPUT));
+            ShowMessages(displayed);
 
             RestoreState(listViewMessages, state);
         }
@@ -131,7 +136,10 @@ namespace LinqCollectionsForm {
             listViewMessages.Items.Clear();
 
             foreach (Message message in messages) {
-                listViewMessages.Items.Add(new ListViewItem(new[] { currentFormatter(message.Text), message.Number, message.ReceivingTime.ToString(CultureInfo.InvariantCulture) }));
+                listViewMessages.Items.Add(new ListViewItem(new[] {
+                    currentFormatter(message.Text),
+                    message.Number,
+                    message.ReceivedTime.ToString(CultureInfo.InvariantCulture) }));
             }
 
             listViewMessages.EndUpdate();
@@ -140,26 +148,6 @@ namespace LinqCollectionsForm {
         private class ListViewState {
             public int TopItemIndex { get; set; }
             public List<int> SelectedRowIds { get; set; }
-        }
-
-        private IEnumerable<Message> FilterMessages(IEnumerable<Message> messages) {
-            return messages.Where((m) => {
-                bool isUsed = false;
-                bool isSelected = radioButtonAnd.Checked;
-
-                foreach (MessageCriteriaSelector selector in criteriaSelectors) {
-                    isUsed |= selector.IsUsed;
-
-                    if (radioButtonAnd.Checked) {
-                        isSelected &= !selector.IsUsed || selector.Predicate(m);
-                    }
-                    else {
-                        isSelected |= selector.IsUsed && selector.Predicate(m);
-                    }
-                }
-
-                return !isUsed || isSelected;
-            });
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Mobile.Phone.NetworkServices.SMS {
 
         public string Text { get; set; }
 
-        public DateTime ReceivingTime { get; set; }
+        public DateTime ReceivedTime { get; set; }
 
         public bool IsIncoming { get; set; }
 
@@ -15,7 +15,7 @@ namespace Mobile.Phone.NetworkServices.SMS {
             Text = text ?? "";
             Number = number;
             IsIncoming = isIncoming;
-            ReceivingTime = receivingTime ?? DateTime.Now;
+            ReceivedTime = receivingTime ?? DateTime.Now;
         }
     }
 }

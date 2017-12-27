@@ -87,6 +87,11 @@
     <Compile Include="Phone\Misc\TouchTechnology.cs" />
     <Compile Include="Phone\MobileBase.cs" />
     <Compile Include="Phone\ModernMobile.cs" />
+    <Compile Include="Phone\NetworkServices\SMS\Filter\SMSFilter.cs" />
+    <Compile Include="Phone\NetworkServices\SMS\Filter\SMSSelectorSimpleFactory.cs" />
+    <Compile Include="Phone\NetworkServices\SMS\Filter\SMSSelector.cs" />
+    <Compile Include="Phone\NetworkServices\SMS\Filter\SMSSelectorComposite.cs" />
+    <Compile Include="Phone\NetworkServices\SMS\Filter\SMSSelectorData.cs" />
     <Compile Include="Phone\NetworkServices\SMS\Message.cs" />
     <Compile Include="Phone\NetworkServices\SMS\SMSMessenger.cs" />
     <Compile Include="Phone\NetworkServices\SMS\SMSProvider.cs" />
