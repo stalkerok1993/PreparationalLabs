@@ -7,7 +7,7 @@ namespace Mobile.Phone.Components.Playback.Tests
     public class ExternalSpeakerTests
     {
         [TestMethod()]
-        public void PlayTest()
+        public void PlayExternalSpeakerTest()
         {
             var output = new OutputMock();
             var mobile = new PhoneStub(output);

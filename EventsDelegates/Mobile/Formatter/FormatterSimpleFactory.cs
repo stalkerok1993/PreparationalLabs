@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
 using UnderstandingOop.Date;
 
 namespace UnderstandingOop.Formatter {
@@ -11,8 +13,10 @@ namespace UnderstandingOop.Formatter {
 
         public IEnumerable<string> AvailableNames => formatters.Keys;
 
-        public FormatterSimpleFactory(IDateProvider dateProvider)
+        public FormatterSimpleFactory(IDateProvider dateProvider, IFormatProvider formatProvider = null)
         {
+            formatProvider = formatProvider ?? CultureInfo.InvariantCulture.DateTimeFormat;
+
             formatters = new Dictionary<string, Formatter>()
             {
                 {"Start with DateTime", (message) => $"[{dateProvider?.Now}] {message}"},

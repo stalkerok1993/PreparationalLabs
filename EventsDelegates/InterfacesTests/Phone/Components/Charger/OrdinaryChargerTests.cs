@@ -7,7 +7,7 @@ namespace Mobile.Phone.Components.Charger.Tests
     public class OrdinaryChargerTests
     {
         [TestMethod()]
-        public void ChargeTest()
+        public void ChargeOrdinaryChargerTest()
         {
             var output = new OutputMock();
             var mobile = new PhoneStub(output);

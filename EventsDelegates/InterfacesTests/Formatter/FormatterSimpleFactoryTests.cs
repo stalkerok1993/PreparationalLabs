@@ -38,7 +38,7 @@ namespace MobileTests1.Formatter.Tests {
 
             string formatted = formatter(message);
 
-            Assert.AreEqual(formatted, $"[{dateProvider.Now}] {message}");
+            Assert.AreEqual(formatted, "[11.03.1993 2:25:35] some asdf random ;lkj message");
         }
 
         [TestMethod()]
@@ -50,7 +50,7 @@ namespace MobileTests1.Formatter.Tests {
 
             string formatted = formatter(message);
 
-            Assert.AreEqual(formatted, $"{message} [{dateProvider.Now}]");
+            Assert.AreEqual(formatted, "some asdf random ;lkj message [11.03.1993 2:25:35]");
         }
 
         [TestMethod]
@@ -62,7 +62,7 @@ namespace MobileTests1.Formatter.Tests {
 
             string formatted = formatter(message);
 
-            Assert.AreEqual(formatted, $"SMS: {message.Trim()}");
+            Assert.AreEqual(formatted, "SMS: some asdf random ;lkj message");
         }
 
         [TestMethod()]
@@ -74,7 +74,7 @@ namespace MobileTests1.Formatter.Tests {
 
             string formatted = formatter(message);
 
-            Assert.AreEqual(formatted, message.ToLower());
+            Assert.AreEqual(formatted, "some asdf random ;lkj message");
         }
 
         [TestMethod()]
@@ -86,7 +86,7 @@ namespace MobileTests1.Formatter.Tests {
 
             string formatted = formatter(message);
 
-            Assert.AreEqual(formatted, message.ToUpper());
+            Assert.AreEqual(formatted, "SOME ASDF RANDOM ;LKJ MESSAGE");
         }
     }
 }

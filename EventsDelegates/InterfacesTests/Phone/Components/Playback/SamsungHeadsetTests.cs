@@ -7,7 +7,7 @@ namespace Mobile.Phone.Components.Playback.Tests
     public class SamsungHeadsetTest
     {
         [TestMethod()]
-        public void PlayTest()
+        public void PlaySamsungHeadsetTest()
         {
             var output = new OutputMock();
             var mobile = new PhoneStub(output);

@@ -5,7 +5,7 @@ namespace Mobile.Phone.Components.Charger.Tests {
     [TestClass()]
     public class FastChargerTests {
         [TestMethod()]
-        public void ChargeTest() {
+        public void ChargeFastChargeTest() {
             var output = new OutputMock();
             var mobile = new PhoneStub(output);
             var charger = new FastCharger(output);
