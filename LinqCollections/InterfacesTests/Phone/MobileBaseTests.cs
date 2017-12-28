@@ -30,8 +30,27 @@ namespace Mobile.Phone.Tests {
         }
 
         [TestMethod()]
-        public void SendSMSTest() {
-            Assert.Fail();
+        public void ReceiveSMSHistoryTest() {
+            string testMessage1 = "Some random SMS asdf;ljkqweproijsdgkhbn";
+            string testNumber1 = "num1";
+            string testMessage2 = "Some random SMS2 asdf;ljkqweproijsdgkhbn";
+            string testNumber2 = "num2";
+            string testMessage3 = "Some random SMS3 asdf;ljkqweproijsdgkhbn";
+            string testNumber3 = "num3";
+            var output = new OutputMock();
+            var mobile = new PhoneStub(output);
+
+            mobile.ReceiveSMS(testMessage1, testNumber1);
+            mobile.ReceiveSMS(testMessage2, testNumber2);
+            mobile.ReceiveSMS(testMessage3, testNumber3);
+
+            Assert.AreEqual(mobile.SMSMessenger.MessageHistory.Count, 3);
+            Assert.AreEqual(mobile.SMSMessenger.MessageHistory[0].Text, testMessage1);
+            Assert.AreEqual(mobile.SMSMessenger.MessageHistory[0].Number, testNumber1);
+            Assert.AreEqual(mobile.SMSMessenger.MessageHistory[1].Text, testMessage2);
+            Assert.AreEqual(mobile.SMSMessenger.MessageHistory[1].Number, testNumber2);
+            Assert.AreEqual(mobile.SMSMessenger.MessageHistory[2].Text, testMessage3);
+            Assert.AreEqual(mobile.SMSMessenger.MessageHistory[2].Number, testNumber3);
         }
     }
 }
