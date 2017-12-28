@@ -76,6 +76,11 @@ namespace Mobile.Phone {
         }
 
         public void Charge(ChargerBase charger) {
+            if (charger == null) {
+                RemoveCharger();
+                return;
+            }
+
             Charger = charger;
             
             if (Charger != null) {
@@ -91,7 +96,7 @@ namespace Mobile.Phone {
 
             ChargerBase temp = Charger;
             Charger = null;
-            if (temp.Mobile != null) {
+            if (temp?.Mobile != null) {
                 temp.RemovePhone();
             }
 
