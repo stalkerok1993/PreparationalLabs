@@ -1,23 +1,22 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
-using Mobile.Date;
-using Mobile.Formatter;
-using Message = Mobile.Phone.NetworkServices.SMS.Message;
+﻿using Mobile.Formatter;
 using Mobile.Output;
 using Mobile.Phone;
-using static Mobile.Formatter.FormatterSimpleFactory;
-using System;
-using System.Globalization;
-using System.Threading;
 using Mobile.Phone.NetworkServices.SMS.Filter;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Threading;
+using System.Windows.Forms;
+using static Mobile.Formatter.FormatterSimpleFactory;
+using Message = Mobile.Phone.NetworkServices.SMS.Message;
 
 namespace LinqCollectionsForm {
     public partial class FormMessageFiltering : Form {
         private readonly IOutput output = new NullOutput();
         private readonly MobileBase mobile;
 
-        private readonly FormatterSimpleFactory formatterFactory = new FormatterSimpleFactory(new SystemDatePrivider());
+        private readonly FormatterSimpleFactory formatterFactory = new FormatterSimpleFactory();
         private Formatter currentFormatter;
 
         private static SMSSelectorComposite compositeSelector = (SMSSelectorComposite)new SMSSelectorSimpleFactory().CreateSelector("CompositeSelector");
@@ -136,7 +135,7 @@ namespace LinqCollectionsForm {
 
             foreach (Message message in messages) {
                 listViewMessages.Items.Add(new ListViewItem(new[] {
-                    currentFormatter(message.Text),
+                    currentFormatter(message),
                     message.Number,
                     message.ReceivedTime.ToString(CultureInfo.InvariantCulture) }));
             }

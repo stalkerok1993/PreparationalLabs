@@ -19,8 +19,8 @@ namespace UnderstandingOop.Formatter {
 
             formatters = new Dictionary<string, Formatter>()
             {
-                {"Start with DateTime", (message) => $"[{dateProvider?.Now}] {message}"},
-                {"End with DateTime", (message) => $"{message} [{dateProvider?.Now}]"},
+                {"Start with DateTime", (message) => $"[{dateProvider?.Now.ToString(formatProvider)}] {message}"},
+                {"End with DateTime", (message) => $"{message} [{dateProvider?.Now.ToString(formatProvider)}]"},
                 {"Custom", (message) => $"SMS: {message.Trim()}"},
                 {"Lowercase", (message) => message.ToLower()},
                 {"Uppercase", (message) => message.ToUpper()}

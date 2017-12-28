@@ -1,5 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Mobile.Phone;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MobileTest.Phone.Components.Misc;
+using Mobile.Output;
+using Mobile.Threading;
 
 namespace Mobile.Phone.Tests {
     [TestClass()]
@@ -51,6 +54,26 @@ namespace Mobile.Phone.Tests {
             Assert.AreEqual(mobile.SMSMessenger.MessageHistory[1].Number, testNumber2);
             Assert.AreEqual(mobile.SMSMessenger.MessageHistory[2].Text, testMessage3);
             Assert.AreEqual(mobile.SMSMessenger.MessageHistory[2].Number, testNumber3);
+        }
+
+        [TestMethod()]
+        public void ChargeThreadTest() {
+            //var mobile = new ModernMobile(new NullOutput(), new BackgroundWorkerFactoryMethod())
+        }
+
+        [TestMethod()]
+        public void NotChargeThreadTest() {
+            Assert.Fail();
+        }
+
+        [TestMethod()]
+        public void ChargeTaskTest() {
+            Assert.Fail();
+        }
+
+        [TestMethod()]
+        public void NotChargeTaskTest() {
+            Assert.Fail();
         }
     }
 }

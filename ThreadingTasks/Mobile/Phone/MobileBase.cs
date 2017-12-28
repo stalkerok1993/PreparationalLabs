@@ -34,12 +34,12 @@ namespace Mobile.Phone {
 
         private ManageableAction managebleChargeAction;
 
-        protected MobileBase(IOutput output) {
+        protected MobileBase(IOutput output, BackgroundWorkerFactoryMethod backgroundWorkerFactory = null) {
             this.output = output;
 
             SMSProvider.SMSReciever += SMSMessenger.AddMessage;
 
-            var workerFactory = new BackgroundWorkerFactoryMethod();
+            var workerFactory = backgroundWorkerFactory ?? new BackgroundWorkerFactoryMethod();
 
             Battery = new Battery();
             BackgroundWorkerBase discharge = workerFactory.CreateWorker(() => {

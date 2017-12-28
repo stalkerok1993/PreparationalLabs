@@ -1,91 +1,37 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MobileTests.Phone.Components.Misc;
+﻿using Mobile.Phone.NetworkServices.SMS;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
 
-namespace Mobile.Formatter.Test {
-    [TestClass()]
-    public class FormatterSimpleFactoryTests {
-        [TestMethod()]
-        public void CreateFormatterTrivial() {
-            var formatterFactory = new FormatterSimpleFactory(null);
+namespace Mobile.Formatter {
+    public class FormatterSimpleFactory {
+        public delegate string Formatter(Message message);
 
-            FormatterSimpleFactory.Formatter formatterNull = formatterFactory.CreateFormatter(null);
-            FormatterSimpleFactory.Formatter formatterNotExists = formatterFactory.CreateFormatter("not existing formatter name asdfasdf");
+        private readonly Dictionary<string, Formatter> formatters;
 
-            Assert.IsTrue(formatterNull == formatterFactory.DefaultFormatter);
-            Assert.IsTrue(formatterNotExists == formatterFactory.DefaultFormatter);
+        public Formatter DefaultFormatter => (message) => message.Text;
+
+        public IEnumerable<string> AvailableNames => formatters.Keys;
+
+        public FormatterSimpleFactory(IFormatProvider formatProvider = null) {
+            formatProvider = formatProvider ?? CultureInfo.InvariantCulture.DateTimeFormat;
+
+            formatters = new Dictionary<string, Formatter>()
+            {
+                {"Start with DateTime", (message) => $"[{message.ReceivedTime.ToString(formatProvider)}] {message.Text}"},
+                {"End with DateTime", (message) => $"{message.Text} [{message.ReceivedTime.ToString(formatProvider)}]"},
+                {"Custom", (message) => $"SMS: {message.Text.Trim()}"},
+                {"Lowercase", (message) => message.Text.ToLower()},
+                {"Uppercase", (message) => message.Text.ToUpper()}
+            };
         }
 
-        [TestMethod()]
-        public void CreateFormatterDefault() {
-            string message = "some asdf random ;lkj message";
-            var dateProvider = new FixedDateProvider(new DateTime(1993, 03, 11, 2, 25, 35));
-            var formatterFactory = new FormatterSimpleFactory(dateProvider);
-            FormatterSimpleFactory.Formatter formatter = formatterFactory.DefaultFormatter;
+        public Formatter CreateFormatter(string name) {
+            if (name == null || !formatters.ContainsKey(name)) {
+                return DefaultFormatter;
+            }
 
-            string formatted = formatter(message);
-
-            Assert.AreEqual(formatted, message);
-        }
-
-        [TestMethod()]
-        public void CreateFormatterStartWithDate() {
-            string message = "some asdf random ;lkj message";
-            var dateProvider = new FixedDateProvider(new DateTime(1993, 03, 11, 2, 25, 35));
-            var formatterFactory = new FormatterSimpleFactory(dateProvider);
-            FormatterSimpleFactory.Formatter formatter = formatterFactory.CreateFormatter("Start with DateTime");
-
-            string formatted = formatter(message);
-
-            Assert.AreEqual(formatted, "[11.03.1993 2:25:35] some asdf random ;lkj message");
-        }
-
-        [TestMethod()]
-        public void CreateFormatterEndWithDate() {
-            string message = "some asdf random ;lkj message";
-            var dateProvider = new FixedDateProvider(new DateTime(1993, 03, 11, 2, 25, 35));
-            var formatterFactory = new FormatterSimpleFactory(dateProvider);
-            FormatterSimpleFactory.Formatter formatter = formatterFactory.CreateFormatter("End with DateTime");
-
-            string formatted = formatter(message);
-
-            Assert.AreEqual(formatted, "some asdf random ;lkj message [11.03.1993 2:25:35]");
-        }
-
-        [TestMethod]
-        public void CreateFormatterCustom() {
-            string message = "some asdf random ;lkj message";
-            var dateProvider = new FixedDateProvider(new DateTime(1993, 03, 11, 2, 25, 35));
-            var formatterFactory = new FormatterSimpleFactory(dateProvider);
-            FormatterSimpleFactory.Formatter formatter = formatterFactory.CreateFormatter("Custom");
-
-            string formatted = formatter(message);
-
-            Assert.AreEqual(formatted, "SMS: some asdf random ;lkj message");
-        }
-
-        [TestMethod()]
-        public void CreateFormatterLowercase() {
-            string message = "some asdf random ;lkj message";
-            var dateProvider = new FixedDateProvider(new DateTime(1993, 03, 11, 2, 25, 35));
-            var formatterFactory = new FormatterSimpleFactory(dateProvider);
-            FormatterSimpleFactory.Formatter formatter = formatterFactory.CreateFormatter("Lowercase");
-
-            string formatted = formatter(message);
-
-            Assert.AreEqual(formatted, "some asdf random ;lkj message");
-        }
-
-        [TestMethod()]
-        public void CreateFormatterUppercase() {
-            string message = "some asdf random ;lkj message";
-            var dateProvider = new FixedDateProvider(new DateTime(1993, 03, 11, 2, 25, 35));
-            var formatterFactory = new FormatterSimpleFactory(dateProvider);
-            FormatterSimpleFactory.Formatter formatter = formatterFactory.CreateFormatter("Uppercase");
-
-            string formatted = formatter(message);
-
-            Assert.AreEqual(formatted, "SOME ASDF RANDOM ;LKJ MESSAGE");
+            return formatters[name];
         }
     }
 }

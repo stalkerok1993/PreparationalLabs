@@ -19,7 +19,7 @@ namespace ThreadingTasks {
         private static readonly IOutput output = new NullOutput();
         private readonly MobileBase mobile;
 
-        private readonly FormatterSimpleFactory formatterFactory = new FormatterSimpleFactory(new SystemDatePrivider());
+        private readonly FormatterSimpleFactory formatterFactory = new FormatterSimpleFactory();
         private Formatter currentFormatter;
 
         private static SMSSelectorComposite compositeSelector = (SMSSelectorComposite)new SMSSelectorSimpleFactory().CreateSelector("CompositeSelector");
@@ -153,7 +153,7 @@ namespace ThreadingTasks {
 
             foreach (Message message in messages) {
                 listViewMessages.Items.Add(new ListViewItem(new[] {
-                    currentFormatter(message.Text),
+                    currentFormatter(message),
                     message.Number,
                     message.ReceivedTime.ToString(CultureInfo.InvariantCulture) }));
             }

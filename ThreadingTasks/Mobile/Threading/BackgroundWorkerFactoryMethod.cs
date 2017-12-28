@@ -1,8 +1,7 @@
 ﻿using System;
 
 namespace Mobile.Threading {
-    public class BackgroundWorkerFactoryMethod {
-
+    public sealed class BackgroundWorkerFactoryMethod {
         public BackgroundWorkerBase CreateWorker(Action backgroundWork, WorkerType workerType = WorkerType.Task) {
             switch (workerType) {
                 case WorkerType.Task:

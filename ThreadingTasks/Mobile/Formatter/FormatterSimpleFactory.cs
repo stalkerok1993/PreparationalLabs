@@ -1,25 +1,28 @@
-﻿using System;
+﻿using Mobile.Phone.NetworkServices.SMS;
+using System;
 using System.Collections.Generic;
-using Mobile.Date;
+using System.Globalization;
 
 namespace Mobile.Formatter {
     public class FormatterSimpleFactory {
-        public delegate string Formatter(string message);
+        public delegate string Formatter(Message message);
 
         private readonly Dictionary<string, Formatter> formatters;
 
-        public Formatter DefaultFormatter => (message) => message;
+        public Formatter DefaultFormatter => (message) => message.Text;
 
         public IEnumerable<string> AvailableNames => formatters.Keys;
 
-        public FormatterSimpleFactory(IDateProvider dateProvider) {
+        public FormatterSimpleFactory(IFormatProvider formatProvider = null) {
+            formatProvider = formatProvider ?? CultureInfo.InvariantCulture.DateTimeFormat;
+
             formatters = new Dictionary<string, Formatter>()
             {
-                {"Continue with DateTime", (message) => $"[{dateProvider?.Now}] {message}"},
-                {"End with DateTime", (message) => $"{message} [{dateProvider?.Now}]"},
-                {"Custom", (message) => $"SMS: {message.Trim()}"},
-                {"Lowercase", (message) => message.ToLower()},
-                {"Uppercase", (message) => message.ToUpper()}
+                {"Start with DateTime", (message) => $"[{message.ReceivedTime.ToString(formatProvider)}] {message.Text}"},
+                {"End with DateTime", (message) => $"{message.Text} [{message.ReceivedTime.ToString(formatProvider)}]"},
+                {"Custom", (message) => $"SMS: {message.Text.Trim()}"},
+                {"Lowercase", (message) => message.Text.ToLower()},
+                {"Uppercase", (message) => message.Text.ToUpper()}
             };
         }
 
