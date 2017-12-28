@@ -97,7 +97,11 @@
     <Compile Include="Phone\NetworkServices\SMS\SMSProvider.cs" />
     <Compile Include="Phone\SimCorpMobile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Threads\ManageableAction.cs" />
+    <Compile Include="Threading\BackgroundWorkerBase.cs" />
+    <Compile Include="Threading\BackgroundWorkerFactoryMethod.cs" />
+    <Compile Include="Threading\ManageableAction.cs" />
+    <Compile Include="Threading\TaskBackgroundWorker.cs" />
+    <Compile Include="Threading\ThreadBackgroundWorker.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

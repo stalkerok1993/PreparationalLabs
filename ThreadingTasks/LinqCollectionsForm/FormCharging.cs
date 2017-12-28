@@ -4,7 +4,7 @@ using Mobile.Output;
 using Mobile.Phone;
 using Mobile.Phone.Components.Charger;
 using Mobile.Phone.NetworkServices.SMS.Filter;
-using Mobile.Threads;
+using Mobile.Threading;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -32,7 +32,7 @@ namespace ThreadingTasks {
 
         private readonly ManageableAction manageableAction;
 
-        private readonly Thread SMSThread;
+        private readonly BackgroundWorkerBase SMSBackgroundSender;
 
         private readonly ChargerBase charger = new OrdinaryCharger(output);
 
@@ -65,10 +65,10 @@ namespace ThreadingTasks {
                 }
                 catch (ObjectDisposedException) {}
                 catch (InvalidOperationException) {}
-
             };
 
             int notMainThreadSmsCount = 1;
+            BackgroundWorkerFactoryMethod workerFactory = new BackgroundWorkerFactoryMethod();
             manageableAction = new ManageableAction(new Action(() => {
                 if (notMainThreadSmsCount == 1) {
                     Thread.Sleep(300);
@@ -78,9 +78,8 @@ namespace ThreadingTasks {
 
                 Thread.Sleep(1000);
             }));
-            SMSThread = new Thread(manageableAction.ThreadStart);
-            SMSThread.IsBackground = true;
-            SMSThread.Start();
+            SMSBackgroundSender = workerFactory.CreateWorker(() => manageableAction.ThreadStart());
+            SMSBackgroundSender.Start();
 
             UpdateChargeBar();
         }

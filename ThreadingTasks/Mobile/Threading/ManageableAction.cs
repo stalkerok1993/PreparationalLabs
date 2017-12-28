@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace Mobile.Threads
+namespace Mobile.Threading
 {
     public sealed class ManageableAction
     {

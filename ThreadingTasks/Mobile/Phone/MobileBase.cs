@@ -1,15 +1,15 @@
-﻿using System;
-using System.Text;
-using System.Threading;
+﻿using Mobile.Output;
 using Mobile.Phone.Components;
+using Mobile.Phone.Components.Charger;
+using Mobile.Phone.Components.Playback;
 using Mobile.Phone.Components.Screen;
 using Mobile.Phone.Graphics;
 using Mobile.Phone.Misc;
-using Mobile.Phone.Components.Playback;
-using Mobile.Phone.Components.Charger;
-using Mobile.Output;
 using Mobile.Phone.NetworkServices.SMS;
-using Mobile.Threads;
+using Mobile.Threading;
+using System;
+using System.Text;
+using System.Threading;
 
 namespace Mobile.Phone {
     public abstract class MobileBase {
@@ -39,23 +39,22 @@ namespace Mobile.Phone {
 
             SMSProvider.SMSReciever += SMSMessenger.AddMessage;
 
+            var workerFactory = new BackgroundWorkerFactoryMethod();
+
             Battery = new Battery();
-            var discharge = new Thread(() => {
+            BackgroundWorkerBase discharge = workerFactory.CreateWorker(() => {
                 while (true) {
                     Thread.Sleep(2500);
                     Battery.ChangeCharge(-Battery.CapacityWh / 100);
                 }
             });
-            discharge.IsBackground = true;
             discharge.Start();
 
             managebleChargeAction = new ManageableAction(new Action(() => {
                 Thread.Sleep(1000);
                 Battery.ChangeCharge(Charger == null ? 0f : (float)Math.Pow(Charger.ChargeCurrentMa, 2) * 0.00005f);
             }));
-            managebleChargeAction.Suspend();
-            var charge = new Thread(managebleChargeAction.ThreadStart);
-            charge.IsBackground = true;
+            BackgroundWorkerBase charge = workerFactory.CreateWorker(() => managebleChargeAction.ThreadStart());
             charge.Start();
         }
 
