@@ -3,6 +3,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MobileTest.Phone.Components.Misc;
 using Mobile.Output;
 using Mobile.Threading;
+using System.Threading;
+using Mobile.Phone.Components.Charger;
 
 namespace Mobile.Phone.Tests {
     [TestClass()]
@@ -58,22 +60,48 @@ namespace Mobile.Phone.Tests {
 
         [TestMethod()]
         public void ChargeThreadTest() {
-            //var mobile = new ModernMobile(new NullOutput(), new BackgroundWorkerFactoryMethod())
+            var mobile = new ModernMobile(new NullOutput(), new BackgroundWorkerFactoryMethod(BackgroundWorkerFactoryMethod.WorkerType.Thread));
+
+            float initialCharge = mobile.Battery.ChargeWh;
+            mobile.Charge(new OrdinaryCharger(new NullOutput()));
+
+            Thread.Sleep(3000);
+
+            Assert.IsTrue(initialCharge < mobile.Battery.ChargeWh);
         }
 
         [TestMethod()]
         public void NotChargeThreadTest() {
-            Assert.Fail();
+            var mobile = new ModernMobile(new NullOutput(), new BackgroundWorkerFactoryMethod(BackgroundWorkerFactoryMethod.WorkerType.Thread));
+
+            float initialCharge = mobile.Battery.ChargeWh;
+
+            Thread.Sleep(3000);
+
+            Assert.IsTrue(initialCharge > mobile.Battery.ChargeWh);
         }
 
         [TestMethod()]
         public void ChargeTaskTest() {
-            Assert.Fail();
+            var mobile = new ModernMobile(new NullOutput(), new BackgroundWorkerFactoryMethod(BackgroundWorkerFactoryMethod.WorkerType.Task));
+
+            float initialCharge = mobile.Battery.ChargeWh;
+            mobile.Charge(new OrdinaryCharger(new NullOutput()));
+
+            Thread.Sleep(3000);
+
+            Assert.IsTrue(initialCharge < mobile.Battery.ChargeWh);
         }
 
         [TestMethod()]
         public void NotChargeTaskTest() {
-            Assert.Fail();
+            var mobile = new ModernMobile(new NullOutput(), new BackgroundWorkerFactoryMethod(BackgroundWorkerFactoryMethod.WorkerType.Task));
+
+            float initialCharge = mobile.Battery.ChargeWh;
+
+            Thread.Sleep(3000);
+
+            Assert.IsTrue(initialCharge > mobile.Battery.ChargeWh);
         }
     }
 }
