@@ -83,18 +83,6 @@ namespace LinqCollectionsForm {
             currentFormatter = formatterFactory.CreateFormatter(selectedKey);
         }
 
-        private sealed class MessageCriteriaSelector {
-            public Func<Message, bool> Predicate { get; private set; }
-            private readonly Func<bool> isUsed;
-
-            public bool IsUsed => isUsed();
-
-            public MessageCriteriaSelector(Func<Message, bool> predicate, Func<bool> isUsed) {
-                Predicate = predicate;
-                this.isUsed = isUsed;
-            }
-        }
-
         private void buttonFilter_Click(object sender, EventArgs e) {
             RefreshListView();
         }
