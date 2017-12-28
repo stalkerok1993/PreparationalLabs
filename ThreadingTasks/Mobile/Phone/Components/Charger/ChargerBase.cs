@@ -14,14 +14,19 @@ namespace Mobile.Phone.Components.Charger
             this.output = output;
         }
 
-        public abstract void Charge(MobileBase mobile);
+        public virtual void Charge(MobileBase mobile) {
+            Mobile = mobile;
+            if (mobile.Charger == null || mobile.Charger != this) {
+                mobile.Charge(this);
+            }
+        }
 
         public void RemovePhone() {
-            if (Mobile.Charger != null) {
-                Mobile.RemoveCharger();
-            }
-
+            MobileBase temp = Mobile;
             Mobile = null;
+            if (temp.Charger != null) {
+                temp.RemoveCharger();
+            }
         }
     }
 }

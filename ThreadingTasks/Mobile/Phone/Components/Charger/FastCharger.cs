@@ -7,10 +7,7 @@ namespace Mobile.Phone.Components.Charger {
         }
 
         public override void Charge(MobileBase mobile) {
-            Mobile = mobile;
-            if (Mobile.Charger == null) {
-                Mobile.Charge(this);
-            }
+            base.Charge(mobile);
             output.WriteLine($"{typeof(MobileBase).Name} is charging with {nameof(FastCharger)}.");
         }
     }

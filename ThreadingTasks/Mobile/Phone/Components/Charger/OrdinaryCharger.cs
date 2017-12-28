@@ -7,7 +7,7 @@ namespace Mobile.Phone.Components.Charger {
         }
 
         public override void Charge(MobileBase mobile) {
-            Mobile = mobile;
+            base.Charge(mobile);
             output.WriteLine($"{typeof(MobileBase).Name} is charging with {nameof(OrdinaryCharger)}.");
         }
     }

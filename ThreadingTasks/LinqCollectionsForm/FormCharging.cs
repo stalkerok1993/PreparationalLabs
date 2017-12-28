@@ -2,21 +2,19 @@
 using Mobile.Formatter;
 using Mobile.Output;
 using Mobile.Phone;
+using Mobile.Phone.Components.Charger;
 using Mobile.Phone.NetworkServices.SMS.Filter;
+using Mobile.Threads;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using Mobile.Phone.Components.Charger;
-using Mobile.Threads;
 using static Mobile.Formatter.FormatterSimpleFactory;
 using Message = Mobile.Phone.NetworkServices.SMS.Message;
 
-namespace ThreadingTasks
-{
+namespace ThreadingTasks {
     public partial class FormCharging : Form {
         private static readonly IOutput output = new NullOutput();
         private readonly MobileBase mobile;
@@ -181,7 +179,14 @@ namespace ThreadingTasks
         }
 
         private void buttonToggleChange_Click(object sender, EventArgs e) {
-            mobile.Charge(charger);
+            if (mobile.Charger != null) {
+                mobile.RemoveCharger();
+                buttonToggleChange.Text = "Charge";
+            }
+            else {
+                mobile.Charge(charger);
+                buttonToggleChange.Text = "Stop";
+            }
         }
 
         private void timerUpdateCharge_Tick(object sender, EventArgs e) {

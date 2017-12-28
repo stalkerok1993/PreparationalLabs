@@ -41,16 +41,17 @@ namespace Mobile.Phone {
 
             Battery = new Battery();
             var discharge = new Thread(() => {
-                var timer = new Timer((sender) => {
+                while (true) {
+                    Thread.Sleep(2500);
                     Battery.ChangeCharge(-Battery.CapacityWh / 100);
-                }, null, 2500, 2500);
+                }
             });
             discharge.IsBackground = true;
             discharge.Start();
 
             managebleChargeAction = new ManageableAction(new Action(() => {
                 Thread.Sleep(1000);
-                Battery.ChangeCharge(Charger == null ? 0f : (float)Math.Pow(Charger.ChargeCurrentMa, 2) * 0.000005f);
+                Battery.ChangeCharge(Charger == null ? 0f : (float)Math.Pow(Charger.ChargeCurrentMa, 2) * 0.00005f);
             }));
             managebleChargeAction.Suspend();
             var charge = new Thread(managebleChargeAction.ThreadStart);
@@ -79,17 +80,22 @@ namespace Mobile.Phone {
             Charger = charger;
             
             if (Charger != null) {
-                Charger.Charge(this);
+                if (Charger.Mobile == null || Charger.Mobile != this) {
+                    Charger.Charge(this);
+                }
                 managebleChargeAction.Continue();
             }
         }
 
         public ChargerBase RemoveCharger() {
-            Charger.RemovePhone();
             managebleChargeAction.Suspend();
 
             ChargerBase temp = Charger;
             Charger = null;
+            if (temp.Mobile != null) {
+                temp.RemovePhone();
+            }
+
             return temp;
         }
 
