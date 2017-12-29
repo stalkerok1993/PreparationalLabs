@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Mobile.Phone.Components.CallList {
-    class SortedList<T> : IList<T> where T : IComparable {
+    public class SortedList<T> : IList<T> where T : IComparable {
         private readonly List<T> objects = new List<T>();
 
         public IEnumerator<T> GetEnumerator()
@@ -18,15 +18,16 @@ namespace Mobile.Phone.Components.CallList {
 
         public void Add(T item)
         {
-            // TODO: debug
-            // int index = objects.FindIndex((i) => i.CompareTo(item) > 0);
-            int index = Math.Abs(objects.BinarySearch(item));
+            // TODO: simplify with binary search?
             objects.Add(item);
-            for (int i = index + 1; i < objects.Count; i++)
-            {
-                objects[i] = objects[i - 1];
+            objects.Sort(new DescendingComparer<T>());
+
+        }
+
+        private class DescendingComparer<T> : IComparer<T> where T : IComparable {
+            public int Compare(T x, T y) {
+                return y.CompareTo(x);
             }
-            objects[index] = item;
         }
 
         public void Clear()

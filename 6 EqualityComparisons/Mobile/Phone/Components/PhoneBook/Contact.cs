@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 namespace Mobile.Phone.Components.PhoneBook {
-    class Contact
+    public class Contact
     {
         public readonly string name;
 

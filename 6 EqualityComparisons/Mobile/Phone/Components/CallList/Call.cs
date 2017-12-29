@@ -4,7 +4,7 @@ using System.Linq;
 using Mobile.Phone.Components.PhoneBook;
 
 namespace Mobile.Phone.Components.CallList {
-    class Call : IComparable
+    public class Call : IComparable
     {
         private readonly Contact contact;
 
@@ -35,7 +35,15 @@ namespace Mobile.Phone.Components.CallList {
         public int CompareTo(object obj)
         {
             Call anotherCall = obj as Call;
-            return CallTime.Last().Time.CompareTo(anotherCall?.CallTime.Last());
+
+            if (anotherCall == null) {
+                throw new InvalidOperationException($"{nameof(anotherCall)} must not be null");
+            }
+            if (CallTime.Count == 0 || anotherCall?.CallTime.Count == 0) {
+                throw new InvalidOperationException($"{nameof(CallTime)} must not be empty");
+            }
+
+            return CallTime.Last().Time.CompareTo(anotherCall.CallTime.Last().Time);
         }
     }
 }

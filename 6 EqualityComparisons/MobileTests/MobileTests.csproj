@@ -57,8 +57,11 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Formatter\FormatterSimpleFactoryTest.cs" />
+    <Compile Include="Phone\Components\CallList\SortedListTests.cs" />
     <Compile Include="Phone\Components\Charger\FastChargerTests.cs" />
     <Compile Include="Phone\Components\Charger\OrdinaryChargerTests.cs" />
+    <Compile Include="Phone\Components\Misc\CallStub.cs" />
+    <Compile Include="Phone\Components\Misc\ContactStub.cs" />
     <Compile Include="Phone\Components\Misc\FixedDateProvider.cs" />
     <Compile Include="Phone\Components\Misc\OutputMock.cs" />
     <Compile Include="Phone\Components\Misc\PhoneStub.cs" />
