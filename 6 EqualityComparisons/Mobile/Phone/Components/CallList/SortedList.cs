@@ -18,14 +18,13 @@ namespace Mobile.Phone.Components.CallList {
 
         public void Add(T item)
         {
-            // TODO: simplify with binary search?
             objects.Add(item);
             objects.Sort(new DescendingComparer<T>());
 
         }
 
-        private class DescendingComparer<T> : IComparer<T> where T : IComparable {
-            public int Compare(T x, T y) {
+        private class DescendingComparer<K> : IComparer<K> where K : IComparable {
+            public int Compare(K x, K y) {
                 return y.CompareTo(x);
             }
         }

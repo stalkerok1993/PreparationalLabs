@@ -122,7 +122,7 @@ namespace ThreadingTasks {
             IEnumerable<Message> displayed = filtered.GetRange(0, Math.Min(filtered.Count, MAXIMUM_OUTPUT));
             ShowMessages(displayed);
 
-            RestoreState(listViewMessages, state);
+            RestoreListViewState(listViewMessages, state);
         }
 
         private ListViewState GetListViewState(ListView listView) {
@@ -136,10 +136,10 @@ namespace ThreadingTasks {
             return state;
         }
 
-        private void RestoreState(ListView listView, ListViewState state)
+        private void RestoreListViewState(ListView listView, ListViewState state)
         {
             try {
-                listViewMessages.TopItem = listView.Items[state.TopItemIndex];
+                listView.TopItem = listView.Items[state.TopItemIndex];
                 foreach (int selectedIx in state.SelectedRowIds) {
                     listView.Items[selectedIx].Selected = true;
                 }

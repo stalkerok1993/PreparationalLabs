@@ -9,22 +9,22 @@ namespace Mobile.Phone.Components.CallList {
         private readonly Contact contact;
 
         public Contact Contact => contact;
-
+        
         public List<CallTime> CallTime { get; private set; } = new List<CallTime>();
         
         public bool IsIncoming { get; private set; }
 
-        public Call(Contact contact, DateTime time, bool isIncoming)
+        public Call(Contact contact, string number, DateTime time, bool isIncoming)
         {
             this.contact = contact;
-            CallTime.Add(new CallTime(time));
+            CallTime.Add(new CallTime(number, time));
             IsIncoming = isIncoming;
         }
 
         public override bool Equals(object obj)
         {
             Call anotherCall = obj as Call;
-            return this == obj || contact.Equals(anotherCall?.contact) && IsIncoming.Equals(anotherCall?.IsIncoming);
+            return this == obj || Contact == anotherCall?.Contact && IsIncoming.Equals(anotherCall?.IsIncoming);
         }
 
         public override int GetHashCode()
