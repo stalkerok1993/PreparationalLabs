@@ -57,6 +57,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Formatter\FormatterSimpleFactoryTest.cs" />
+    <Compile Include="Phone\Components\CallList\CallTests.cs" />
     <Compile Include="Phone\Components\CallList\SortedListTests.cs" />
     <Compile Include="Phone\Components\Charger\FastChargerTests.cs" />
     <Compile Include="Phone\Components\Charger\OrdinaryChargerTests.cs" />
