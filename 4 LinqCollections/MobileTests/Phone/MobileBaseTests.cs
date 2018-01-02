@@ -1,9 +1,18 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Mobile.Phone.Components.Screen;
 using MobileTest.Phone.Components.Misc;
 
 namespace Mobile.Phone.Tests {
     [TestClass()]
     public class MobileBaseTests {
+        [TestMethod()]
+        public void ScreenGetTest() {
+            var output = new OutputMock();
+            var mobile = new PhoneStub(output);
+
+            Assert.IsTrue(mobile.Screen is OLEDScreen);
+        }
+
         [TestMethod()]
         public void ReceiveSMSTrivialTest() {
             bool isRecieved = false;

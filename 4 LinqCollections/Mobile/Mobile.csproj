@@ -46,8 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Date\IDateProvider.cs" />
-    <Compile Include="Date\SystemDateProvider.cs" />
     <Compile Include="Formatter\FormatterSimpleFactory.cs" />
     <Compile Include="Output\ConsoleOutput.cs" />
     <Compile Include="Output\FileOutput.cs" />

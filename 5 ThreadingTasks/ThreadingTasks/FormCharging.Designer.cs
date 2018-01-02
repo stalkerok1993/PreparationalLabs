@@ -58,7 +58,7 @@
             this.groupBoxFunctions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBoxFunctions.Controls.Add(this.radioButtonOr);
             this.groupBoxFunctions.Controls.Add(this.radioButtonAnd);
-            this.groupBoxFunctions.Location = new System.Drawing.Point(275, 6);
+            this.groupBoxFunctions.Location = new System.Drawing.Point(404, 6);
             this.groupBoxFunctions.Name = "groupBoxFunctions";
             this.groupBoxFunctions.Size = new System.Drawing.Size(118, 70);
             this.groupBoxFunctions.TabIndex = 30;
@@ -95,7 +95,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonFilter.Location = new System.Drawing.Point(12, 138);
             this.buttonFilter.Name = "buttonFilter";
-            this.buttonFilter.Size = new System.Drawing.Size(300, 23);
+            this.buttonFilter.Size = new System.Drawing.Size(429, 23);
             this.buttonFilter.TabIndex = 31;
             this.buttonFilter.Text = "Apply filter";
             this.buttonFilter.UseVisualStyleBackColor = true;
@@ -105,7 +105,7 @@
             // 
             this.checkBoxReceivedBefore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBoxReceivedBefore.AutoSize = true;
-            this.checkBoxReceivedBefore.Location = new System.Drawing.Point(378, 116);
+            this.checkBoxReceivedBefore.Location = new System.Drawing.Point(507, 116);
             this.checkBoxReceivedBefore.Name = "checkBoxReceivedBefore";
             this.checkBoxReceivedBefore.Size = new System.Drawing.Size(15, 14);
             this.checkBoxReceivedBefore.TabIndex = 29;
@@ -116,7 +116,7 @@
             // 
             this.checkBoxReceivedAfter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBoxReceivedAfter.AutoSize = true;
-            this.checkBoxReceivedAfter.Location = new System.Drawing.Point(378, 88);
+            this.checkBoxReceivedAfter.Location = new System.Drawing.Point(507, 88);
             this.checkBoxReceivedAfter.Name = "checkBoxReceivedAfter";
             this.checkBoxReceivedAfter.Size = new System.Drawing.Size(15, 14);
             this.checkBoxReceivedAfter.TabIndex = 28;
@@ -144,7 +144,7 @@
             // columnHeaderText
             // 
             this.columnHeaderText.Text = "Text";
-            this.columnHeaderText.Width = 180;
+            this.columnHeaderText.Width = 300;
             // 
             // listViewMessages
             // 
@@ -158,7 +158,7 @@
             this.listViewMessages.FullRowSelect = true;
             this.listViewMessages.Location = new System.Drawing.Point(12, 196);
             this.listViewMessages.Name = "listViewMessages";
-            this.listViewMessages.Size = new System.Drawing.Size(381, 130);
+            this.listViewMessages.Size = new System.Drawing.Size(510, 130);
             this.listViewMessages.TabIndex = 25;
             this.listViewMessages.UseCompatibleStateImageBehavior = false;
             this.listViewMessages.View = System.Windows.Forms.View.Details;
@@ -205,7 +205,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dateTimePickerReceivedBefore.Location = new System.Drawing.Point(114, 112);
             this.dateTimePickerReceivedBefore.Name = "dateTimePickerReceivedBefore";
-            this.dateTimePickerReceivedBefore.Size = new System.Drawing.Size(258, 20);
+            this.dateTimePickerReceivedBefore.Size = new System.Drawing.Size(387, 20);
             this.dateTimePickerReceivedBefore.TabIndex = 21;
             this.dateTimePickerReceivedBefore.ValueChanged += new System.EventHandler(this.buttonFilter_Click);
             // 
@@ -215,7 +215,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dateTimePickerReceivedAfter.Location = new System.Drawing.Point(114, 86);
             this.dateTimePickerReceivedAfter.Name = "dateTimePickerReceivedAfter";
-            this.dateTimePickerReceivedAfter.Size = new System.Drawing.Size(258, 20);
+            this.dateTimePickerReceivedAfter.Size = new System.Drawing.Size(387, 20);
             this.dateTimePickerReceivedAfter.TabIndex = 20;
             this.dateTimePickerReceivedAfter.ValueChanged += new System.EventHandler(this.buttonFilter_Click);
             // 
@@ -225,7 +225,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxMessageContains.Location = new System.Drawing.Point(114, 60);
             this.textBoxMessageContains.Name = "textBoxMessageContains";
-            this.textBoxMessageContains.Size = new System.Drawing.Size(155, 20);
+            this.textBoxMessageContains.Size = new System.Drawing.Size(284, 20);
             this.textBoxMessageContains.TabIndex = 19;
             this.textBoxMessageContains.TextChanged += new System.EventHandler(this.buttonFilter_Click);
             // 
@@ -236,7 +236,7 @@
             this.comboBoxPhone.FormattingEnabled = true;
             this.comboBoxPhone.Location = new System.Drawing.Point(114, 33);
             this.comboBoxPhone.Name = "comboBoxPhone";
-            this.comboBoxPhone.Size = new System.Drawing.Size(155, 21);
+            this.comboBoxPhone.Size = new System.Drawing.Size(284, 21);
             this.comboBoxPhone.TabIndex = 18;
             this.comboBoxPhone.TextChanged += new System.EventHandler(this.buttonFilter_Click);
             // 
@@ -250,7 +250,7 @@
             "None"});
             this.comboBoxFormatter.Location = new System.Drawing.Point(114, 6);
             this.comboBoxFormatter.Name = "comboBoxFormatter";
-            this.comboBoxFormatter.Size = new System.Drawing.Size(155, 21);
+            this.comboBoxFormatter.Size = new System.Drawing.Size(284, 21);
             this.comboBoxFormatter.TabIndex = 17;
             this.comboBoxFormatter.SelectedIndexChanged += new System.EventHandler(this.comboBoxFormatters_SelectedIndexChanged);
             // 
@@ -266,14 +266,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.progressBarCharge.Location = new System.Drawing.Point(12, 167);
             this.progressBarCharge.Name = "progressBarCharge";
-            this.progressBarCharge.Size = new System.Drawing.Size(257, 23);
+            this.progressBarCharge.Size = new System.Drawing.Size(386, 23);
             this.progressBarCharge.TabIndex = 32;
             this.progressBarCharge.Value = 90;
             // 
             // buttonToggleChange
             // 
             this.buttonToggleChange.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonToggleChange.Location = new System.Drawing.Point(318, 167);
+            this.buttonToggleChange.Location = new System.Drawing.Point(447, 167);
             this.buttonToggleChange.Name = "buttonToggleChange";
             this.buttonToggleChange.Size = new System.Drawing.Size(75, 23);
             this.buttonToggleChange.TabIndex = 33;
@@ -284,7 +284,7 @@
             // buttonToggleMessages
             // 
             this.buttonToggleMessages.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonToggleMessages.Location = new System.Drawing.Point(318, 138);
+            this.buttonToggleMessages.Location = new System.Drawing.Point(447, 138);
             this.buttonToggleMessages.Name = "buttonToggleMessages";
             this.buttonToggleMessages.Size = new System.Drawing.Size(75, 23);
             this.buttonToggleMessages.TabIndex = 34;
@@ -300,10 +300,9 @@
             // 
             // labelCharge
             // 
-            this.labelCharge.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelCharge.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelCharge.BackColor = System.Drawing.SystemColors.Control;
-            this.labelCharge.Location = new System.Drawing.Point(275, 167);
+            this.labelCharge.Location = new System.Drawing.Point(404, 167);
             this.labelCharge.Name = "labelCharge";
             this.labelCharge.Size = new System.Drawing.Size(37, 23);
             this.labelCharge.TabIndex = 35;
@@ -314,7 +313,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(405, 338);
+            this.ClientSize = new System.Drawing.Size(534, 338);
             this.Controls.Add(this.labelCharge);
             this.Controls.Add(this.buttonToggleMessages);
             this.Controls.Add(this.buttonToggleChange);

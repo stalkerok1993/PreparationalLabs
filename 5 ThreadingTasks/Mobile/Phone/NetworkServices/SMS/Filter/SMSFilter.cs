@@ -10,7 +10,7 @@ namespace Mobile.Phone.NetworkServices.SMS.Filter {
         }
 
         public IEnumerable<Message> Filter(IEnumerable<Message> messages, SMSSelectorData data) {
-            if (Selector == null) {
+            if (Selector == null || messages == null) {
                 return messages;
             }
 

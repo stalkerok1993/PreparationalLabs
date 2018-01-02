@@ -10,11 +10,16 @@ namespace Mobile.Phone.NetworkServices.SMS.Filter {
         }
 
         public IEnumerable<Message> Filter(IEnumerable<Message> messages, SMSSelectorData data) {
-            if (Selector == null) {
+            if (Selector == null || messages == null) {
                 return messages;
             }
 
-            return messages.Where((m) => !Selector.IsUsed(data) || Selector.Predicate(m, data));
+            IEnumerable<Message> filtered =
+                from message in messages
+                where !Selector.IsUsed(data) || Selector.Predicate(message, data)
+                select message;
+
+            return filtered;
         }
     }
 }

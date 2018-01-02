@@ -104,11 +104,13 @@ namespace Mobile.Phone {
         }
 
         public void ReceiveSMS(string text, string number) {
-            SMSProvider.RaiseSMSRecieverEvent(new Message(text, number));
+            if (Battery.ChargeWh > 0) {
+                SMSProvider.RaiseSMSRecieverEvent(new Message(text, number));
+            }
         }
 
         public void SendSMS(string text, string number) {
-            if (number != null) {
+            if (Battery.ChargeWh > 0 && number != null) {
                 var message = new Message(text, number, false);
                 SMSMessenger.AddMessage(message);
             }

@@ -1,12 +1,26 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mobile.Phone.NetworkServices.SMS;
 using System;
+using System.Linq;
 
 namespace Mobile.Formatter {
     [TestClass()]
     public class FormatterSimpleFactoryTests {
+        //AvailableNames
         [TestMethod()]
-        public void CreateFormatterTrivial() {
+        public void AvailableNamesTest() {
+            var formatterFactory = new FormatterSimpleFactory(null);
+
+            Assert.IsTrue(formatterFactory.AvailableNames.Contains("Start with DateTime"));
+            Assert.IsTrue(formatterFactory.AvailableNames.Contains("End with DateTime"));
+            Assert.IsTrue(formatterFactory.AvailableNames.Contains("Custom"));
+            Assert.IsTrue(formatterFactory.AvailableNames.Contains("Lowercase"));
+            Assert.IsTrue(formatterFactory.AvailableNames.Contains("Uppercase"));
+        }
+
+
+        [TestMethod()]
+        public void CreateFormatterTrivialTest() {
             var formatterFactory = new FormatterSimpleFactory(null);
 
             FormatterSimpleFactory.Formatter formatterNull = formatterFactory.CreateFormatter(null);
@@ -17,7 +31,7 @@ namespace Mobile.Formatter {
         }
 
         [TestMethod()]
-        public void CreateFormatterDefault() {
+        public void CreateFormatterDefaultTest() {
             string message = "some asdf random ;lkj message";
             var date = new DateTime(1993, 03, 11, 2, 25, 35);
             var formatterFactory = new FormatterSimpleFactory();
@@ -29,7 +43,7 @@ namespace Mobile.Formatter {
         }
 
         [TestMethod()]
-        public void CreateFormatterStartWithDate() {
+        public void CreateFormatterStartWithDateTest() {
             string message = "some asdf random ;lkj message";
             var date = new DateTime(1993, 03, 11, 2, 25, 35);
             var formatterFactory = new FormatterSimpleFactory();
@@ -41,7 +55,7 @@ namespace Mobile.Formatter {
         }
 
         [TestMethod()]
-        public void CreateFormatterEndWithDate() {
+        public void CreateFormatterEndWithDateTest() {
             string message = "some asdf random ;lkj message";
             var date = new DateTime(1993, 03, 11, 2, 25, 35);
             var formatterFactory = new FormatterSimpleFactory();
@@ -53,7 +67,7 @@ namespace Mobile.Formatter {
         }
 
         [TestMethod]
-        public void CreateFormatterCustom() {
+        public void CreateFormatterCustomTest() {
             string message = "some asdf random ;lkj message";
             var date = new DateTime(1993, 03, 11, 2, 25, 35);
             var formatterFactory = new FormatterSimpleFactory();
@@ -65,7 +79,7 @@ namespace Mobile.Formatter {
         }
 
         [TestMethod()]
-        public void CreateFormatterLowercase() {
+        public void CreateFormatterLowercaseTest() {
             string message = "some asdf random ;lkj message";
             var date = new DateTime(1993, 03, 11, 2, 25, 35);
             var formatterFactory = new FormatterSimpleFactory();
@@ -77,7 +91,7 @@ namespace Mobile.Formatter {
         }
 
         [TestMethod()]
-        public void CreateFormatterUppercase() {
+        public void CreateFormatterUppercaseTest() {
             string message = "some asdf random ;lkj message";
             var date = new DateTime(1993, 03, 11, 2, 25, 35);
             var formatterFactory = new FormatterSimpleFactory();

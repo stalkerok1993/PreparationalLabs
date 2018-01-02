@@ -98,6 +98,8 @@ namespace ThreadingTasks {
             string selectedKey = cbSender?.SelectedItem.ToString();
 
             currentFormatter = formatterFactory.CreateFormatter(selectedKey);
+
+            RefreshListView();
         }
 
         private void buttonFilter_Click(object sender, EventArgs e) {
@@ -118,8 +120,8 @@ namespace ThreadingTasks {
                 compositeSelector.SelectorBooleanFunction = SMSSelectorComposite.SelectorBoolFunc.Or;
             }
 
-            List<Message> filtered = filter.Filter(messageHistoryCopy, data).ToList();
-            IEnumerable<Message> displayed = filtered.GetRange(0, Math.Min(filtered.Count, MAXIMUM_OUTPUT));
+            List<Message> filtered = filter.Filter(messageHistoryCopy, data)?.ToList();
+            IEnumerable<Message> displayed = filtered?.GetRange(0, Math.Min(filtered.Count, MAXIMUM_OUTPUT));
             ShowMessages(displayed);
 
             RestoreListViewState(listViewMessages, state);
@@ -151,11 +153,14 @@ namespace ThreadingTasks {
 
             listViewMessages.Items.Clear();
 
-            foreach (Message message in messages) {
-                listViewMessages.Items.Add(new ListViewItem(new[] {
-                    currentFormatter(message),
-                    message.Number,
-                    message.ReceivedTime.ToString(CultureInfo.InvariantCulture) }));
+            if (messages != null) {
+                foreach (Message message in messages) {
+                    listViewMessages.Items.Add(new ListViewItem(new[] {
+                        currentFormatter(message),
+                        message.Number,
+                        message.ReceivedTime.ToString(CultureInfo.InvariantCulture)
+                    }));
+                }
             }
 
             listViewMessages.EndUpdate();
