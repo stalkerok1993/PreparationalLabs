@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mobile.Phone.Components.CallList;
-using Mobile.Phone.Components.PhoneBook;
 using MobileTests.Phone.Components.Misc;
 
 namespace MobileTests1.Phone.Components.CallList {
